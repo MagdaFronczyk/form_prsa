@@ -4,7 +4,7 @@
   padding: 0;
 }
 
-.nowa-tradycja-form-section {
+.back {
   background: url("./img/Warstwa\ 943.png") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -12,29 +12,36 @@
   background-size: cover;
   height: 100vh;
   overflow: hidden;
-  padding: 56px 364px;
+}
+
+.nowa-tradycja-form-section {
+  max-width: 1191px;
+  height: auto;
+  margin: 0 auto;
   font-family: 'Cabin', sans-serif;
   color: #e4e4e4;
+  padding-top: 3%;
+  overflow: hidden;
 }
 
 .nowa-tradycja-form {
-  display: flex;
-  flex-wrap: wrap;
-  padding-top: 64px;
+  /* display: flex;
+  flex-wrap: wrap; */
+  padding-top: 5%;
 }
 
 .nowa-tradycja-form-title {
   font-size: 20px;
   text-transform: uppercase;
   font-weight: 700;
-  padding-left: 20px;
+  padding-left: 40px;
   position: relative;
 }
 
 .nowa-tradycja-form-title::before {
   content: url("./img/Inteligentny\ obiekt\ wektorowy.png");
   position: absolute;
-  left: 0;
+  left: 10px;
 }
 
 .nowa-tradycja-form_field {
@@ -49,16 +56,12 @@
   flex-basis: 50%;
   flex-wrap: wrap;
   position: relative;
+  padding: 0 10px 10px 10px;
 }
 
-.nowa-tradycja-form_field.text-fields:nth-child(odd) {
+/* .nowa-tradycja-form_field.text-fields:nth-child(odd) {
   padding-right: 3%;
-}
-
-.nowa-tradycja-form_field.text-fields:nth-child(even) {
-  padding-left: 3%;
-}
-
+} */
 
 .nowa-tradycja-form_field.text-fields input {
   padding: 10px;
@@ -77,12 +80,18 @@
   border: 2px solid #DF0546;
 }
 
+.nowa-tradycja-form_field.text-fields input:valid {
+  background: url(./img/Elipsa\ 2056.png) rgba(255, 255, 255, 0.1);
+  background-repeat: no-repeat;
+  background-position: 98%;
+}
+
 .nowa-tradycja-form_field.text-fields input:focus {
   outline: none;
 }
 
 .nowa-tradycja-form_field.text-fields label {
-  padding-bottom: 2%;
+  padding-bottom: 3%;
 }
 
 .nowa-tradycja-form_field.text-fields label::after {
@@ -92,8 +101,7 @@
 }
 
 .nowa-tradycja-form_files {
-  display: flex;
-  justify-content: space-between;
+  padding: 0 10px 0 10px;
   width: 100%;
 }
 
@@ -108,7 +116,7 @@
 }
 
 .nowa-tradycja-form_field.file-fields label {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.2);
   height: 38px;
   width: 365px;
   vertical-align: middle;
@@ -127,8 +135,122 @@
   color: #565656;
 }
 
-.nowa-tradycja-form_field.text-fields input:valid {
-  background: url(./img/Elipsa\ 2056.png) rgba(255, 255, 255, 0.1);
-  background-repeat: no-repeat;
-  background-position: 98%;
+.nowa-tradycja-form_agreements {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+}
+
+.button {
+  background-color: #e10d49;
+  width: 141px;
+  height: 34px;
+  outline: none;
+  border: none;
+  color: #e3e1df;
+  font-size: 18px;
+  font-family: inherit;
+  font-weight: 700;
+  margin: 0 auto;
+  text-transform: uppercase;
+  transition: .5s ease-out;
+}
+
+.button:hover {
+  background-color: #e3e1df;
+  color: #e10d49;
+}
+
+.nowa-tradycja-form_agreements .nowa-tradycja-form_field label {
+  vertical-align: middle;
+  display: table-cell;
+  height: 25px;
+}
+
+.checkmark-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: 16px;
+}
+
+.checkmark-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+.checkmark-container input:checked~.checkmark {
+  background-color: #e10d49;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+
+.checkmark-container input:checked~.checkmark:after {
+  display: block;
+}
+
+.checkmark-container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+@media (min-width: 576px) {
+  .nowa-tradycja-form {
+    display: flex;
+    flex-wrap: wrap
+  }
+
+  .nowa-tradycja-form_field.text-fields:nth-child(odd) {
+    padding-right: 3%;
+  }
+
+  .nowa-tradycja-form_files {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .nowa-tradycja-form-title::before {
+    left: 0;
+  }
+
+  .nowa-tradycja-form-title {
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-left: 20px;
+    position: relative;
+  }
+
 }
