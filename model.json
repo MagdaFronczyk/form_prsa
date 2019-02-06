@@ -1,0 +1,11 @@
+{
+  "FirstName": "Grzegorz",
+  "LastName": "Brzęczyszczykiewicz",
+  "Nick": null,
+  "Email": "mail@mail.pl",
+  "ExtraFieldsJson": "{\"AddressStreet\":\"Poleczki 9/11\",\"AddressCity\":\"Warszawa\",\"ZipCode\":\"00-000\",\"Phone\":\"123 456 789\",\"Fax\":\"fax\",\"BandMembersCount\":9,\"UsedInstruments\":\"Flet, Flet poprzeczny\",\"TechnicalNeeds\":\"Szklanka wody po każdym numerze zimna wóda na backstage\",\"ShortProgramDescribe\":\"Krótki opis zespołu\",\"PerformerBiography\":\"Biografia\"}",
+  "RulesJson": "{\"IsAcceptedGeneralRules\":false}",
+  "Songs": [],
+  "Photos": [],
+  "Documents": []
+}

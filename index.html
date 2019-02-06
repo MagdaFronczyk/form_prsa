@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+
+<section class="nowa-tradycja-form-section">
+
+  <h2 class="nowa-tradycja-form-title">formularz zgłoszenia do konkursu muzyki folkowej polskiego radia s.a "nowa
+    tradycja"</h2>
+
+  <form class="nowa-tradycja-form">
+
+    <div class="nowa-tradycja-form_field text-fields">
+      <label for="firstName">
+        Imię
+      </label>
+      <input type="text" name="name" id="firstName" pattern="([a-zA-Z]+) *[^/]*?" minlength="3" maxlength="50" required
+        title="Użyto niedozwolonych znaków">
+    </div>
+
+    <div class="nowa-tradycja-form_field text-fields">
+      <label for="lastName">
+        Nazwisko
+      </label>
+      <input type="text" name="lastName" id="lastName" pattern="([a-zA-Z]+) *[^/]*?" minlength="3" maxlength="50"
+        required title="Użyto niedozwolonych znaków">
+    </div>
+
+    <div class="nowa-tradycja-form_field text-fields">
+      <label for="Nick">
+        Nick
+      </label>
+      <input type="text" name="nick" id="nick" pattern="([a-zA-Z]+) *[^/]*?" minlength="3" maxlength="50" required
+        title="Użuto niedozwolonych znaków">
+    </div>
+
+    <div class="nowa-tradycja-form_field text-fields">
+      <label for="e-mail">
+        Email
+      </label>
+      <input type="email" name="email" id="e-mail" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" required
+        title="Użyto niedozwolonych znaków">
+    </div>
+
+    <div class="nowa-tradycja-form_files">
+
+      <div class="nowa-tradycja-form_field file-fields">
+        <label for="music-file">
+          Dodaj uwtory
+          <i class="fas fa-file-upload"></i>
+        </label>
+        <input type="file" id="music-file" name="music-file" accept="audio/*" required multiple>
+      </div>
+
+      <div class="nowa-tradycja-form_field file-fields">
+        <label for="image-file">
+          Dodaj zdjęcia
+          <i class="fas fa-file-upload"></i>
+        </label>
+        <input type="file" id="image-file" name="image-file" accept="image/*" required multiple>
+      </div>
+
+      <div class="nowa-tradycja-form_field file-fields">
+        <label for="document-file">
+          Dodaj Formularz PDF
+          <i class="fas fa-file-upload"></i>
+        </label>
+        <input type="file" id="document-file" name="document-file" accept=".pdf">
+      </div>
+    </div>
+
+    <div class="nowa-tradycja-form_agreements">
+      <div class="nowa-tradycja-form_field">
+        <label for="agreement">
+          Zgadzam się
+        </label>
+        <input type="checkbox" id="agreement" name="agreement" required>
+      </div>
+    </div>
+    <input type="submit" class="button" value="Submit" id="submit-button">
+  </form>
+
+</section>
+<script src="app.js"></script>
+
+</html>
