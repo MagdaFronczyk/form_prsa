@@ -17,6 +17,7 @@
   font-family: 'Cabin', sans-serif;
   color: #e4e4e4;
   padding-top: 3%;
+  padding-bottom: 3%;
   overflow: hidden;
 }
 
@@ -53,7 +54,7 @@
 
 #nowa-tradycja-form-background .nowa-tradycja-form_field.text-fields input {
   padding: 10px;
-  width: 100%;
+  width: 100% !important;
   background: rgba(255, 255, 255, 0.1);
   border: transparent;
   height: 45px;
@@ -222,10 +223,14 @@
   margin: 0;
 }
 
+#nowa-tradycja-form-background section {
+  margin-bottom: 0;
+}
+
 @media (min-width: 576px) {
   #nowa-tradycja-form-background .nowa-tradycja-form {
     display: flex;
-    flex-wrap: wrap
+    flex-wrap: wrap;
   }
 
   #nowa-tradycja-form-background .nowa-tradycja-form_field.text-fields:nth-child(odd) {
@@ -250,7 +255,18 @@
 
 }
 
-@media (min-width: 1130px) {
+@media (max-width: 767px) {
+  #nowa-tradycja-form-background .nowa-tradycja-form-title {
+    padding-left: 30px;
+  }
+
+  #nowa-tradycja-form-background .nowa-tradycja-form-title::before {
+    left: 5px;
+  }
+
+}
+
+@media (min-width: 1280px) {
   #nowa-tradycja-form-background .nowa-tradycja-form_files {
     display: flex;
     justify-content: space-between;
