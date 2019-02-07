@@ -8,12 +8,13 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
     crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
   <title>Document</title>
 </head>
 
-<div class="back">
+<div id="nowa-tradycja-form-background">
 
-  <section class="nowa-tradycja-form-section">
+  <section class="nowa-tradycja-form-section container">
 
     <h2 class="nowa-tradycja-form-title">formularz zgłoszenia do konkursu muzyki folkowej polskiego radia s.a "nowa
       tradycja"</h2>
@@ -24,32 +25,28 @@
         <label for="firstName">
           Imię
         </label>
-        <input type="text" name="name" id="firstName" pattern="([a-zA-Z]+) *[^/]*?" minlength="3" maxlength="50"
-          required title="Użyto niedozwolonych znaków">
+        <input type="text" name="name" id="firstName" minlength="3" maxlength="50" required title="Użyto niedozwolonych znaków">
       </div>
 
       <div class="nowa-tradycja-form_field text-fields">
         <label for="lastName">
           Nazwisko
         </label>
-        <input type="text" name="lastName" id="lastName" pattern="([a-zA-Z]+) *[^/]*?" minlength="3" maxlength="50"
-          required title="Użyto niedozwolonych znaków">
+        <input type="text" name="lastName" id="lastName" minlength="3" maxlength="50" required title="Użyto niedozwolonych znaków">
       </div>
 
       <div class="nowa-tradycja-form_field text-fields">
         <label for="Nick">
           Nick
         </label>
-        <input type="text" name="nick" id="nick" pattern="([a-zA-Z]+) *[^/]*?" minlength="3" maxlength="50" required
-          title="Użuto niedozwolonych znaków">
+        <input type="text" name="nick" id="nick" minlength="3" maxlength="50" required title="Użuto niedozwolonych znaków">
       </div>
 
       <div class="nowa-tradycja-form_field text-fields">
         <label for="e-mail">
           Email
         </label>
-        <input type="email" name="email" id="e-mail" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" required
-          title="Użyto niedozwolonych znaków">
+        <input type="email" name="email" id="e-mail" required title="Użyto niedozwolonych znaków">
       </div>
 
       <div class="nowa-tradycja-form_files">
@@ -90,7 +87,9 @@
 
         <input type="submit" class="button" value="Wyślij" id="submit-button">
       </div>
+
     </form>
+    
   </section>
 
 </div>

@@ -4,60 +4,54 @@
   padding: 0;
 }
 
-.back {
-  background: url("./img/Warstwa\ 943.png") no-repeat center center fixed;
+#nowa-tradycja-form-background {
+  background: url("//static.prsa.pl/c0466f07-06e1-49da-8c5d-28bb67647da6.file") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 100vh;
-  overflow: hidden;
 }
 
-.nowa-tradycja-form-section {
-  max-width: 1191px;
+#nowa-tradycja-form-background .nowa-tradycja-form-section {
   height: auto;
-  margin: 0 auto;
   font-family: 'Cabin', sans-serif;
   color: #e4e4e4;
   padding-top: 3%;
   overflow: hidden;
 }
 
-.nowa-tradycja-form {
+#nowa-tradycja-form-background .nowa-tradycja-form {
   padding-top: 5%;
 }
 
-.nowa-tradycja-form-title {
-  font-size: 20px;
+#nowa-tradycja-form-background .nowa-tradycja-form-title {
+  font-size: 15px;
   text-transform: uppercase;
   font-weight: 700;
-  padding-left: 40px;
   position: relative;
 }
 
-.nowa-tradycja-form-title::before {
-  content: url("./img/Inteligentny\ obiekt\ wektorowy.png");
+#nowa-tradycja-form-background .nowa-tradycja-form-title::before {
+  content: url("//static.prsa.pl/d9601899-cf08-4417-9589-27046a8c896a.file");
   position: absolute;
-  left: 10px;
+  left: -20px;
 }
 
-.nowa-tradycja-form_field {
-  font-size: 18px;
+#nowa-tradycja-form-background .nowa-tradycja-form_field {
+  font-size: 12px;
   font-weight: 700;
   padding-bottom: 2%;
 }
 
-.nowa-tradycja-form_field.text-fields {
+#nowa-tradycja-form-background .nowa-tradycja-form_field.text-fields {
   display: inline-block;
   display: flex;
   flex-basis: 50%;
   flex-wrap: wrap;
   position: relative;
-  padding: 0 10px 10px 10px;
 }
 
-.nowa-tradycja-form_field.text-fields input {
+#nowa-tradycja-form-background .nowa-tradycja-form_field.text-fields input {
   padding: 10px;
   width: 100%;
   background: rgba(255, 255, 255, 0.1);
@@ -70,36 +64,35 @@
   transition: .5s ease-out;
 }
 
-.nowa-tradycja-form_field.text-fields input:invalid {
+#nowa-tradycja-form-background .nowa-tradycja-form_field.text-fields input:invalid {
   border: 2px solid #DF0546;
 }
 
-.nowa-tradycja-form_field.text-fields input:valid {
-  background: url(./img/Elipsa\ 2056.png) rgba(255, 255, 255, 0.1);
+#nowa-tradycja-form-background .nowa-tradycja-form_field.text-fields input:valid {
+  background: url("//static.prsa.pl/0aa47d31-e747-4bd8-9871-62ff0a3bb6ec.file") rgba(255, 255, 255, 0.1);
   background-repeat: no-repeat;
   background-position: 98%;
 }
 
-.nowa-tradycja-form_field.text-fields input:focus {
+#nowa-tradycja-form-background .nowa-tradycja-form_field.text-fields input:focus {
   outline: none;
 }
 
-.nowa-tradycja-form_field.text-fields label {
+#nowa-tradycja-form-background .nowa-tradycja-form_field.text-fields label {
   padding-bottom: 3%;
 }
 
-.nowa-tradycja-form_field.text-fields label::after {
+#nowa-tradycja-form-background .nowa-tradycja-form_field.text-fields label::after {
   padding-bottom: 2%;
   content: "*";
   color: #DF0546;
 }
 
-.nowa-tradycja-form_files {
-  padding: 0 10px 0 10px;
+#nowa-tradycja-form-background .nowa-tradycja-form_files {
   width: 100%;
 }
 
-.nowa-tradycja-form_field.file-fields input {
+#nowa-tradycja-form-background .nowa-tradycja-form_field.file-fields input {
   border: 0;
   clip: rect(0, 0, 0, 0);
   height: 1px;
@@ -109,34 +102,103 @@
   width: 1px;
 }
 
-.nowa-tradycja-form_field.file-fields label {
+#nowa-tradycja-form-background .nowa-tradycja-form_field.file-fields label {
   background-color: rgba(0, 0, 0, 0.2);
   height: 38px;
   width: 365px;
   display: block;
-  font-size: 17.97px;
+  font-size: 12px;
   font-weight: 700;
-  padding: 10px;
+  padding: 13px;
   transition: .5s ease-out;
   margin: 0 auto;
 }
 
-.nowa-tradycja-form_field.file-fields .fa-file-upload {
-  padding-left: 10px;
+#nowa-tradycja-form-background .nowa-tradycja-form_field.file-fields .fa-file-upload {
+  padding-left: 5px;
 }
 
-.nowa-tradycja-form_field.file-fields label:hover {
+#nowa-tradycja-form-background .nowa-tradycja-form_field.file-fields label:hover {
   color: #565656;
 }
 
-.nowa-tradycja-form_agreements {
+#nowa-tradycja-form-background .nowa-tradycja-form_agreements {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 10px;
 }
 
-.button {
+#nowa-tradycja-form-background .button:hover {
+  background-color: #e3e1df;
+  color: #e10d49;
+}
+
+#nowa-tradycja-form-background .nowa-tradycja-form_agreements .nowa-tradycja-form_field label {
+  vertical-align: middle;
+  display: table-cell;
+  height: 25px;
+  font-size: 12px;
+}
+
+#nowa-tradycja-form-background .checkmark-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: 16px;
+}
+
+#nowa-tradycja-form-background .checkmark-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+#nowa-tradycja-form-background .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+#nowa-tradycja-form-background .checkmark-container input:checked~.checkmark {
+  background-color: #e10d49;
+}
+
+#nowa-tradycja-form-background .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+
+#nowa-tradycja-form-background .checkmark-container input:checked~.checkmark:after {
+  display: block;
+}
+
+#nowa-tradycja-form-background .checkmark-container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#nowa-tradycja-form-background .button {
   background-color: #e10d49;
   width: 141px;
   height: 34px;
@@ -151,99 +213,46 @@
   transition: .5s ease-out;
 }
 
-.button:hover {
-  background-color: #e3e1df;
-  color: #e10d49;
+#nowa-tradycja-form-background label {
+  text-align: left;
+  padding: 0;
 }
 
-.nowa-tradycja-form_agreements .nowa-tradycja-form_field label {
-  vertical-align: middle;
-  display: table-cell;
-  height: 25px;
-}
-
-.checkmark-container {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  font-size: 16px;
-}
-
-.checkmark-container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-}
-
-.checkmark-container input:checked~.checkmark {
-  background-color: #e10d49;
-}
-
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-
-.checkmark-container input:checked~.checkmark:after {
-  display: block;
-}
-
-.checkmark-container .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
+#nowa-tradycja-form-background input {
+  margin: 0;
 }
 
 @media (min-width: 576px) {
-  .nowa-tradycja-form {
+  #nowa-tradycja-form-background .nowa-tradycja-form {
     display: flex;
     flex-wrap: wrap
   }
 
-  .nowa-tradycja-form_field.text-fields:nth-child(odd) {
+  #nowa-tradycja-form-background .nowa-tradycja-form_field.text-fields:nth-child(odd) {
     padding-right: 3%;
   }
 
-  .nowa-tradycja-form-title::before {
-    left: 10px;
+  #nowa-tradycja-form-background .nowa-tradycja-form-title {
+    font-size: 20px;
   }
 
-  .nowa-tradycja-form-title {
-    font-size: 20px;
+  #nowa-tradycja-form-background .nowa-tradycja-form_field {
+    font-size: 18px;
+  }
+
+  #nowa-tradycja-form-background .nowa-tradycja-form_field.file-fields label {
+    font-size: 17px
+  }
+
+  #nowa-tradycja-form-background .nowa-tradycja-form_field.file-fields label {
+    padding: 10px;
   }
 
 }
 
 @media (min-width: 1130px) {
-  .nowa-tradycja-form_files {
+  #nowa-tradycja-form-background .nowa-tradycja-form_files {
     display: flex;
     justify-content: space-between;
   }
-
 }

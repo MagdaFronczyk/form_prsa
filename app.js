@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector("form");
+  const form = document.querySelector(".nowa-tradycja-form");
+
+  console.log(form)
   const formData = new FormData();
 
   const handleInput = (selector, formDataKey) => {
@@ -40,9 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     e.preventDefault();
 
-    fetch("http://localhost:55899/saveform", {
-      method: 'POST',
-      body: formData
+    axios({
+      method: 'post',
+      data: formData,
+      url: 'http://localhost:55899/saveform'
     }).then(console.log("hhhh"));
 
   });
