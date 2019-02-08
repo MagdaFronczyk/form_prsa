@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
     crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
   <title>Document</title>
 </head>
 
@@ -26,18 +27,24 @@
           Imię
         </label>
         <input type="text" name="name" id="firstName" minlength="3" maxlength="50">
+        <div class="error-container">
+          <span class="error-message empty">Pole obowiązkowe</span>
+          <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
+          <span class="error-message long">Musi być krótsze niż 50 znaków</span>
+          <span class="error-message letters">Musisz używać liter</span>
+        </div>
       </div>
 
       <div class="nowa-tradycja-form_field text-fields" minlength="3" maxlength="50">
         <label for="lastName">
           Nazwisko
         </label>
-        <input type="text" name="lastName" id="lastName" >
+        <input type="text" name="lastName" id="lastName">
       </div>
 
       <div class="nowa-tradycja-form_field text-fields">
         <label for="Nick">
-          Nick
+          Nazwa zespołu
         </label>
         <input type="text" name="nick" id="nick" minlength="3" maxlength="50" required title="Użuto niedozwolonych znaków">
       </div>

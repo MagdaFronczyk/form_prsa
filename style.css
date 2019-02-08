@@ -12,6 +12,17 @@
   background-size: cover;
 }
 
+#nowa-tradycja-form-background .nowa-tradycja-form_field .error-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#nowa-tradycja-form-background .nowa-tradycja-form_field .error-message {
+  color: #DF0546;
+  font-size: 11px;
+  display: none;
+}
+
 #nowa-tradycja-form-background .nowa-tradycja-form-section {
   height: auto;
   font-family: 'Cabin', sans-serif;
@@ -50,6 +61,10 @@
   flex-basis: 50%;
   flex-wrap: wrap;
   position: relative;
+}
+
+#nowa-tradycja-form-background input::placeholder {
+  color: #DF0546;
 }
 
 #nowa-tradycja-form-background .nowa-tradycja-form_field.text-fields input {
@@ -181,7 +196,6 @@
   position: absolute;
   display: none;
 }
-
 
 #nowa-tradycja-form-background .checkmark-container input:checked~.checkmark:after {
   display: block;
