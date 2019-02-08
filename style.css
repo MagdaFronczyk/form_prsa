@@ -65,11 +65,11 @@
   transition: .5s ease-out;
 }
 
-#nowa-tradycja-form-background .nowa-tradycja-form_field.text-fields input:invalid {
+#nowa-tradycja-form-background .nowa-tradycja-form_field.text-fields input.invalid {
   border: 2px solid #DF0546;
 }
 
-#nowa-tradycja-form-background .nowa-tradycja-form_field.text-fields input:valid {
+#nowa-tradycja-form-background .nowa-tradycja-form_field.text-fields input.valid {
   background: url("//static.prsa.pl/0aa47d31-e747-4bd8-9871-62ff0a3bb6ec.file") rgba(255, 255, 255, 0.1);
   background-repeat: no-repeat;
   background-position: 98%;

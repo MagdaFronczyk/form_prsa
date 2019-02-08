@@ -2,10 +2,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const formButton = document.querySelector(".button");
 
   const formData = new FormData();
+  let extraFieldsvalidation;
+  let textInputvalidation;
 
-  const handleInput = (selector, formDataKey) => {
-    const value = document.querySelector(selector).value;
-    formData.append(formDataKey, value);
+  const handleTextInput = (selector, key) => {
+
+    const input = document.querySelector(selector);
+    const value = input.value;
+
+    if (value === "" || value.length < 3 || value.length > 50 || isNaN(value) === false) {
+      input.classList.remove("valid");
+      input.classList.add("invalid");
+      textInputvalidation = false;
+    } else {
+      input.classList.remove("invalid");
+      input.classList.add("valid");
+      formData.append(key, value);
+      textInputvalidation = true;
+    }
   }
 
   const handleCheckbox = (selector) => {
@@ -13,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const rulesJson = JSON.stringify({
       IsAcceptedGeneralRules: checkedBoolean
     });
-    console.log(rulesJson);
     formData.append("rulesJson", rulesJson);
   }
 
@@ -26,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // }
 
   const handleExtraFields = () => {
+
     const extraFields = {
       AddressStreet: "",
       AddressCity: "",
@@ -39,50 +53,63 @@ document.addEventListener("DOMContentLoaded", () => {
       PerformerBiography: "",
     }
 
-    const streetValue = document.querySelector("#street-name").value;
-    extraFields.AddressStreet = streetValue;
+    const validateTextExtraFields = (selector, key) => {
+      const input = document.querySelector(selector);
+      const value = input.value;
 
-    const cityValue = document.querySelector("#city-name").value;
-    extraFields.AddressCity = cityValue;
+      if (value === "" || value.length < 3 || value.length > 50 || isNaN(value) === false) {
+        input.classList.remove("valid");
+        input.classList.add("invalid");
+        extraFieldsvalidation = false;
+      } else {
+        extraFields[key] = value;
+        input.classList.remove("invalid");
+        input.classList.add("valid");
+        extraFieldsvalidation = true;
+      }
+    }
 
-    const zipCodeValue = document.querySelector("#zip-code").value;
-    extraFields.AddressCity = zipCodeValue;
+    const validateNumberExtraFields = (selector, key) => {
+      const input = document.querySelector(selector);
+      const value = input.value;
 
-    const phoneValue = document.querySelector("#phone").value;
-    extraFields.Phone = phoneValue;
+      if (value === "" || isNaN(value)) {
+        input.classList.remove("valid");
+        input.classList.add("invalid");
+        extraFieldsvalidation = false;
+      } else {
+        extraFields[key] = value;
+        input.classList.remove("invalid");
+        input.classList.add("valid");
+        extraFieldsvalidation = true;
+      }
 
-    const faxValue = document.querySelector("#fax").value;
-    extraFields.Fax = faxValue;
+    }
 
-    const bandMembersCountValue = document.querySelector("#band-count").value;
-    extraFields.BandMembersCount = bandMembersCountValue;
 
-    const instrumentsValue = document.querySelector("#instruments").value;
-    extraFields.UsedInstruments = instrumentsValue;
-
-    const technicalNeedsValue = document.querySelector("#technical-needs").value;
-    extraFields.TechnicalNeeds = technicalNeedsValue;
-
-    const programValue = document.querySelector("#program");
-    extraFields.ShortProgramDescribe = programValue;
-
-    const biographyValue = document.querySelector("#biografia");
-    extraFields.PerformerBiography = biographyValue;
+    validateTextExtraFields("#street-name", "AddressStreet");
+    validateTextExtraFields("#city-name", "AddressCity");
+    validateTextExtraFields("#instruments", "UsedInstruments");
+    validateTextExtraFields("#technical-needs", "TechnicalNeeds");
+    validateTextExtraFields("#program", "ShortProgramDescribe");
+    validateTextExtraFields("#biografia", "PerformerBiography");
+    validateNumberExtraFields("#zip-code", "ZipCode");
+    validateNumberExtraFields("#phone", "Phone");
+    validateNumberExtraFields("#fax", "Fax");
+    validateNumberExtraFields("#band-count", "BandMembersCount");
 
     const extraFieldsJson = JSON.stringify(extraFields);
 
-    formData.append("ExtraFieldsJson", extraFieldsJson);
+    formData.append("ExtraFieldsJSON", extraFieldsJson);
 
-    console.log(extraFields);
-    console.log(extraFieldsJson);
   }
 
   formButton.addEventListener("click", e => {
 
-    handleInput("#firstName", "FirstName");
-    handleInput("#lastName", "LastName");
-    handleInput("#nick", "Nick");
-    handleInput("#e-mail", "Email");
+    handleTextInput("#firstName", "FirstName");
+    handleTextInput("#lastName", "LastName");
+    handleTextInput("#nick", "Nick");
+    // handleInputText("#e-mail", "Email");
     handleCheckbox("#agreement");
     // handleFiles("#music-file", "audio-file");
     // handleFiles("#image-file", "image-file");
@@ -94,13 +121,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     e.preventDefault();
 
-    axios({
-      method: 'post',
-      data: formData,
-      url: 'http://localhost:55899/saveform'
-    }).then(console.log("hhhh"));
-
+    if (textInputvalidation && extraFieldsvalidation) {
+      axios({
+        method: 'post',
+        data: formData,
+        url: 'http://localhost:55899/saveform'
+      }).then(console.log("Validated"));
+    }
   });
-
 
 });
