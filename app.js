@@ -9,30 +9,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const handleTextInput = (selector, key) => {
 
-    const input = document.querySelector(selector);
+    const fieldContainer =  document.querySelector(selector);
+    const input = fieldContainer.querySelector(`${selector} input`);
     const value = input.value;
 
-
-    if (value.length < 0 || value.length < 3 || value.length > 50 || isNaN(value) === false) {
+    if (!value.length || value.length < 3 || value.length > 50 || !isNaN(value)) {
       input.classList.remove("valid");
       input.classList.add("invalid");
 
-      if (value.length <= 0) {
-        const error = document.querySelector(".error-message.empty");
+      if (!value.length) {
+        const error = fieldContainer.querySelector(".empty");
         error.style.display = "block";
-      } else if (value.length >= 1 && value.length < 3) {
-        const error = document.querySelector(".error-message.short");
+        console.log(error);
+      } else if (value.length >= 1 && value.length < 3 && isNaN(value)) {
+        const error = fieldContainer.querySelector(".short");
         error.style.display = "block";
-      } else if (value.length > 50) {
-        const error = document.querySelector(".error-message.long");
-        error.style.display = "block";
+        console.log(error);
+      } else if (value.length > 50 && isNaN(value)) {
+          const error = fieldContainer.querySelector(".long");
+          error.style.display = "block";
+          console.log(error)
+      } else if (!isNaN(value)) {
+          const error = fieldContainer.querySelector(".letters");
+          error.style.display = "block";
       }
 
       textInputvalidation = false;
 
     } else {
-      const errors = document.querySelectorAll(".error-message");
-
+      const errors = fieldContainer.querySelectorAll(`.error-message`);
       errors.forEach(error => {
         error.style.display = "none"
       });
@@ -42,22 +47,16 @@ document.addEventListener("DOMContentLoaded", () => {
       formData.append(key, value);
       textInputvalidation = true;
     }
-  }
+  };
 
   const handleCheckbox = (selector) => {
     const checkedBoolean = document.querySelector(selector).checked;
-    if (!checkedBoolean) {
-      agreementValidation = false;
-    } else {
-      agreementValidation = true;
-    }
+    agreementValidation = checkedBoolean;
     const rulesJson = JSON.stringify({
       IsAcceptedGeneralRules: checkedBoolean
     });
     formData.append("rulesJson", rulesJson);
-  }
-
-
+  };
 
   // const handleFiles = (selector, name) => {
   //   const files = document.querySelector(selector).files;
@@ -80,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
       TechnicalNeeds: "",
       ShortProgramDescribe: "",
       PerformerBiography: "",
-    }
+    };
 
     const validateTextExtraFields = (selector, key) => {
       const input = document.querySelector(selector);
@@ -96,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
         input.classList.add("valid");
         extraFieldsvalidation = true;
       }
-    }
+    };
 
     const validateNumberExtraFields = (selector, key) => {
       const input = document.querySelector(selector);
@@ -113,8 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
         extraFieldsvalidation = true;
       }
 
-    }
-
+    };
 
     validateTextExtraFields("#street-name", "AddressStreet");
     validateTextExtraFields("#city-name", "AddressCity");
@@ -129,40 +127,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const extraFieldsJson = JSON.stringify(extraFields);
 
-    console.log(extraFieldsJson);
-    console.log(extraFields)
+    // console.log(extraFieldsJson);
+    // console.log(extraFields);
 
     formData.append("ExtraFieldsJSON", extraFields);
 
-  }
+  };
 
-  const validateEmail = (email) => {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-  }
+  // const validateEmail = (email) => {
+  //   let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //   return re.test(email);
+  // };
 
-  const handleEmail = (selector, key) => {
-    const emailInput = document.querySelector(selector);
-    const emailValue = emailInput.value;
-
-    if (validateEmail(emailValue)) {
-      emailInput.classList.remove("invalid");
-      emailInput.classList.add("valid");
-      emailValidation = true;
-      formData.append(key, emailValue);
-    } else {
-      emailValidation = false;
-      emailInput.classList.remove("valid");
-      emailInput.classList.add("invalid");
-    }
-  }
+  // const handleEmail = (selector, key) => {
+  //   const emailInput = document.querySelector(selector);
+  //   const emailValue = emailInput.value;
+  //
+  //   if (validateEmail(emailValue)) {
+  //     emailInput.classList.remove("invalid");
+  //     emailInput.classList.add("valid");
+  //     emailValidation = true;
+  //     formData.append(key, emailValue);
+  //   } else {
+  //     emailValidation = false;
+  //     emailInput.classList.remove("valid");
+  //     emailInput.classList.add("invalid");
+  //   }
+  // };
 
   formButton.addEventListener("click", e => {
 
-    handleTextInput("#firstName", "FirstName");
-    handleTextInput("#lastName", "LastName");
-    handleTextInput("#nick", "Nick");
-    handleEmail("#e-mail", "Email");
+    handleTextInput(".firstName", "FirstName");
+    handleTextInput(".lastName", "LastName");
+    handleTextInput(".nick", "Nick");
+    // handleEmail(".e-mail", "Email");
 
     handleCheckbox("#agreement");
     // handleFiles("#music-file", "audio-file");
@@ -170,9 +168,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // handleFiles("#document-file", "documents");
     handleExtraFields();
 
-    for (let el of formData.entries()) {
-      console.log(el);
-    }
+    // for (let el of formData.entries()) {
+    //   console.log(el);
+    // }
     e.preventDefault();
 
     if (textInputvalidation && extraFieldsvalidation && agreementValidation && emailValidation) {

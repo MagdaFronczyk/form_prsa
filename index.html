@@ -13,7 +13,7 @@
   <title>Document</title>
 </head>
 
-<div id="nowa-tradycja-form-background">
+<div id="nowa-tradycja-form-main">
 
   <section class="nowa-tradycja-form-section container">
 
@@ -22,11 +22,11 @@
 
     <div class="nowa-tradycja-form">
 
-      <div class="nowa-tradycja-form_field text-fields">
+      <div class="nowa-tradycja-form_field text-fields firstName">
         <label for="firstName">
           Imię
         </label>
-        <input type="text" name="name" id="firstName" minlength="3" maxlength="50">
+        <input type="text" name="name" id="firstName" minlength="3" maxlength="50" required>
         <div class="error-container">
           <span class="error-message empty">Pole obowiązkowe</span>
           <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
@@ -35,95 +35,125 @@
         </div>
       </div>
 
-      <div class="nowa-tradycja-form_field text-fields" minlength="3" maxlength="50">
+      <div class="nowa-tradycja-form_field text-fields firstName lastName">
         <label for="lastName">
           Nazwisko
         </label>
-        <input type="text" name="lastName" id="lastName">
+        <input type="text" name="lastName" id="lastName" minlength="3" maxlength="50" required>
+        <div class="error-container">
+          <span class="error-message empty">Pole obowiązkowe</span>
+          <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
+          <span class="error-message long">Musi być krótsze niż 50 znaków</span>
+          <span class="error-message letters">Musisz używać liter</span>
+        </div>
       </div>
 
-      <div class="nowa-tradycja-form_field text-fields">
-        <label for="Nick">
+      <div class="nowa-tradycja-form_field text-fields nick">
+        <label for="nick">
           Nazwa zespołu
         </label>
-        <input type="text" name="nick" id="nick" minlength="3" maxlength="50" required title="Użuto niedozwolonych znaków">
+        <input type="text" name="nick" id="nick" minlength="3" maxlength="50" required>
+        <div class="error-container">
+          <span class="error-message empty">Pole obowiązkowe</span>
+          <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
+          <span class="error-message long">Musi być krótsze niż 50 znaków</span>
+          <span class="error-message letters">Musisz używać liter</span>
+        </div>
       </div>
 
-      <div class="nowa-tradycja-form_field text-fields">
+      <div class="nowa-tradycja-form_field text-fields e-mail">
         <label for="e-mail">
           Email
         </label>
-        <input type="email" name="email" id="e-mail" required title="Użyto niedozwolonych znaków">
+        <input type="email" name="email" id="e-mail">
+        <div class="error-container">
+          <span class="error-message empty">Pole obowiązkowe</span>
+          <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
+          <span class="error-message long">Musi być krótsze niż 50 znaków</span>
+          <span class="error-message letters">Musisz używać liter</span>
+        </div>
       </div>
 
-      <div class="nowa-tradycja-form_field text-fields">
+      <div class="nowa-tradycja-form_field text-fields street-name">
         <label for="street-name">
           Ulica
         </label>
-        <input type="text" name="street-name" id="street-name" required title="Użyto niedozwolonych znaków">
+        <input type="text" name="street-name" id="street-name" minlength="3" maxlength="50" required>
+        <div class="error-container">
+          <span class="error-message empty">Pole obowiązkowe</span>
+          <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
+          <span class="error-message long">Musi być krótsze niż 50 znaków</span>
+          <span class="error-message letters">Musisz używać liter</span>
+        </div>
       </div>
 
-      <div class="nowa-tradycja-form_field text-fields">
+      <div class="nowa-tradycja-form_field text-fields city-name">
         <label for="city-name">
           Miejscowość
         </label>
-        <input type="text" name="city-name" id="city-name" required title="Użyto niedozwolonych znaków">
+        <input type="text" name="city-name" id="city-name" minlength="3" maxlength="50" required>
+        <div class="error-container">
+          <span class="error-message empty">Pole obowiązkowe</span>
+          <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
+          <span class="error-message long">Musi być krótsze niż 50 znaków</span>
+          <span class="error-message letters">Musisz używać liter</span>
+        </div>
       </div>
 
-      <div class="nowa-tradycja-form_field text-fields">
+      <div class="nowa-tradycja-form_field number-fields">
         <label for="zip-code">
           Kod pocztowy
         </label>
-        <input type="text" name="zip-code" id="zip-code" required title="Użyto niedozwolonych znaków">
+        <input type="text" name="zip-code" id="zip-code" >
       </div>
 
-      <div class="nowa-tradycja-form_field text-fields">
+      <div class="nowa-tradycja-form_field number-fields">
         <label for="phone">
           Telefon
         </label>
-        <input type="text" name="phone" id="phone" required title="Użyto niedozwolonych znaków">
+        <input type="text" name="phone" id="phone">
       </div>
 
-      <div class="nowa-tradycja-form_field text-fields">
+      <div class="nowa-tradycja-form_field number-fields">
         <label for="fax">
           Fax
         </label>
-        <input type="text" name="fax" id="fax" required title="Użyto niedozwolonych znaków">
+        <input type="text" name="fax" id="fax">
       </div>
 
-      <div class="nowa-tradycja-form_field text-fields">
+      <div class="nowa-tradycja-form_field number-fields">
         <label for="band-count">
           Ilość człownków zespołu
         </label>
-        <input type="text" name="band-count" id="band-count" required title="Użyto niedozwolonych znaków">
+        <input type="text" name="band-count" id="band-count">
       </div>
 
       <div class="nowa-tradycja-form_field text-fields">
         <label for="instruments">
           Używane instrumenty
         </label>
-        <input type="text" name="instruments" id="instruments" required title="Użyto niedozwolonych znaków">
+        <input type="text" name="instruments" id="instruments">
       </div>
 
       <div class="nowa-tradycja-form_field text-fields">
         <label for="technical-needs">
           Potrzeby techniczne
         </label>
-        <input type="text" name="technical-needs" id="technical-needs" required title="Użyto niedozwolonych znaków">
+        <input type="text" name="technical-needs" id="technical-needs" minlength="3" maxlength="50" required>
       </div>
 
       <div class="nowa-tradycja-form_field text-fields">
         <label for="program">
           Program
         </label>
-        <input type="text" name="program" id="program" required title="Użyto niedozwolonych znaków">
+        <input type="text" name="program" id="program" minlength="3" maxlength="50" required>
       </div>
 
       <div class="nowa-tradycja-form_field text-fields">
         <label for="biografia">
           Biografia
         </label>
-        <input type="text" name="biografia" id="biografia" required title="Użyto niedozwolonych znaków">
+        <input type="text" name="biografia" id="biografia" minlength="3" maxlength="50" required>
       </div>
 
       <div class="nowa-tradycja-form_files">
