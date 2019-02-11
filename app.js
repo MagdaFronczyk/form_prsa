@@ -2,46 +2,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const formButton = document.querySelector(".button");
 
   const formData = new FormData();
-  let extraFieldsvalidation;
   let textInputvalidation;
   let agreementValidation;
   let emailValidation;
+  let numberValidation;
 
   const handleTextInput = (selector, key) => {
 
-    const fieldContainer =  document.querySelector(selector);
+    const fieldContainer = document.querySelector(selector);
     const input = fieldContainer.querySelector(`${selector} input`);
     const value = input.value;
 
     if (!value.length || value.length < 3 || value.length > 50 || !isNaN(value)) {
       input.classList.remove("valid");
       input.classList.add("invalid");
-
       if (!value.length) {
         const error = fieldContainer.querySelector(".empty");
         error.style.display = "block";
-        console.log(error);
-      } else if (value.length >= 1 && value.length < 3 && isNaN(value)) {
+      } else if (value.length && value.length < 3 && isNaN(value)) {
         const error = fieldContainer.querySelector(".short");
         error.style.display = "block";
-        console.log(error);
       } else if (value.length > 50 && isNaN(value)) {
-          const error = fieldContainer.querySelector(".long");
-          error.style.display = "block";
-          console.log(error)
+        const error = fieldContainer.querySelector(".long");
+        error.style.display = "block";
       } else if (!isNaN(value)) {
-          const error = fieldContainer.querySelector(".letters");
-          error.style.display = "block";
+        const error = fieldContainer.querySelector(".letters");
+        error.style.display = "block";
       }
-
       textInputvalidation = false;
-
     } else {
-      const errors = fieldContainer.querySelectorAll(`.error-message`);
+      const errors = fieldContainer.querySelectorAll(".error-message");
       errors.forEach(error => {
         error.style.display = "none"
       });
-
       input.classList.remove("invalid");
       input.classList.add("valid");
       formData.append(key, value);
@@ -58,6 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
     formData.append("rulesJson", rulesJson);
   };
 
+
+
   // const handleFiles = (selector, name) => {
   //   const files = document.querySelector(selector).files;
   //   console.log(files);
@@ -66,6 +61,69 @@ document.addEventListener("DOMContentLoaded", () => {
   //   }
   // }
 
+  const validateZipCode = (selector, key) => {
+    const fieldContainer = document.querySelector(selector);
+    const input = fieldContainer.querySelector(`${selector} input`);
+    const value = input.value;
+
+    if (!value.length || value.length !== 4 || isNaN(value)) {
+      input.classList.remove("valid");
+      input.classList.add("invalid");
+      numberValidation = false;
+      if (!value.length) {
+        const error = fieldContainer.querySelector(".empty");
+        error.style.display = "block";
+      } else if (value.length && value.length < 4 && !isNaN(value)) {
+        const error = fieldContainer.querySelector(".short");
+        error.style.display = "block";
+      } else if (isNaN(value)) {
+        const error = fieldContainer.querySelector(".letters");
+        error.style.display = "block";
+      } else if (value.length && value.length > 4 && !isNaN(value)) {
+        const error = fieldContainer.querySelector(".long");
+        error.style.display = "block";
+      }
+    } else {
+      const errors = fieldContainer.querySelectorAll(".error-message");
+      errors.forEach(error => {
+        error.style.display = "none"
+      });
+      input.classList.remove("invalid");
+      input.classList.add("valid");
+      formData.append(key, value);
+      numberValidation = true;
+    }
+
+  };
+
+  const handleNumbers = (selector, key) => {
+    const fieldContainer = document.querySelector(selector);
+    const input = fieldContainer.querySelector(`${selector} input`);
+    const value = input.value;
+
+    if (!value.length || isNaN(value)) {
+      input.classList.remove("valid");
+      input.classList.add("invalid");
+      numberValidation = false;
+      if (!value.length) {
+        const error = fieldContainer.querySelector(".empty");
+        error.style.display = "block";
+      } else if (isNaN(value)) {
+        const error = fieldContainer.querySelector(".letters");
+        error.style.display = "block";
+      }
+
+    } else {
+      const errors = fieldContainer.querySelectorAll(".error-message");
+      errors.forEach(error => {
+        error.style.display = "none"
+      });
+      input.classList.remove("invalid");
+      input.classList.add("valid");
+      formData.append(key, value);
+      numberValidation = true;
+    }
+  }
   const handleExtraFields = () => {
 
     const extraFields = {
@@ -81,56 +139,19 @@ document.addEventListener("DOMContentLoaded", () => {
       PerformerBiography: "",
     };
 
-    const validateTextExtraFields = (selector, key) => {
-      const input = document.querySelector(selector);
-      const value = input.value;
-
-      if (value === "" || value.length < 3 || value.length > 50 || isNaN(value) === false) {
-        input.classList.remove("valid");
-        input.classList.add("invalid");
-        extraFieldsvalidation = false;
-      } else {
-        extraFields[key] = value;
-        input.classList.remove("invalid");
-        input.classList.add("valid");
-        extraFieldsvalidation = true;
-      }
-    };
-
-    const validateNumberExtraFields = (selector, key) => {
-      const input = document.querySelector(selector);
-      const value = input.value;
-
-      if (value === "" || isNaN(value)) {
-        input.classList.remove("valid");
-        input.classList.add("invalid");
-        extraFieldsvalidation = false;
-      } else {
-        extraFields[key] = value;
-        input.classList.remove("invalid");
-        input.classList.add("valid");
-        extraFieldsvalidation = true;
-      }
-
-    };
-
-    validateTextExtraFields("#street-name", "AddressStreet");
-    validateTextExtraFields("#city-name", "AddressCity");
-    validateTextExtraFields("#instruments", "UsedInstruments");
-    validateTextExtraFields("#technical-needs", "TechnicalNeeds");
-    validateTextExtraFields("#program", "ShortProgramDescribe");
-    validateTextExtraFields("#biografia", "PerformerBiography");
-    validateNumberExtraFields("#zip-code", "ZipCode");
-    validateNumberExtraFields("#phone", "Phone");
-    validateNumberExtraFields("#fax", "Fax");
-    validateNumberExtraFields("#band-count", "BandMembersCount");
+    handleTextInput(".street-name", "AddressStreet");
+    handleTextInput(".city-name", "AddressCity");
+    handleTextInput(".instruments", "UsedInstruments");
+    handleTextInput(".technical-needs", "TechnicalNeeds");
+    handleTextInput(".program", "ShortProgramDescribe");
+    handleTextInput(".biografia", "PerformerBiography");
+    validateZipCode(".zip-code", "ZipCode");
+    handleNumbers(".phone", "Phone");
+    handleNumbers(".fax", "Fax");
+    handleNumbers(".band-count", "BandMembersCount");
 
     const extraFieldsJson = JSON.stringify(extraFields);
-
-    // console.log(extraFieldsJson);
-    // console.log(extraFields);
-
-    formData.append("ExtraFieldsJSON", extraFields);
+    formData.append("ExtraFieldsJSON", extraFieldsJson);
 
   };
 
@@ -139,28 +160,40 @@ document.addEventListener("DOMContentLoaded", () => {
   //   return re.test(email);
   // };
 
-  // const handleEmail = (selector, key) => {
-  //   const emailInput = document.querySelector(selector);
-  //   const emailValue = emailInput.value;
-  //
-  //   if (validateEmail(emailValue)) {
-  //     emailInput.classList.remove("invalid");
-  //     emailInput.classList.add("valid");
-  //     emailValidation = true;
-  //     formData.append(key, emailValue);
-  //   } else {
-  //     emailValidation = false;
-  //     emailInput.classList.remove("valid");
-  //     emailInput.classList.add("invalid");
-  //   }
-  // };
+  const handleEmail = (selector, key) => {
+    const fieldContainer = document.querySelector(selector);
+    const input = fieldContainer.querySelector(`${selector} input`);
+    const value = input.value;
+
+    if (value.indexOf("@") > -1) {
+      const errors = fieldContainer.querySelectorAll(".error-message");
+      if (errors) {
+        errors.forEach(error => error.style.display = "none");
+      }
+      input.classList.remove("invalid");
+      input.classList.add("valid");
+      emailValidation = true;
+      formData.append(key, value);
+    } else {
+      if (!value.length) {
+        const error = fieldContainer.querySelector(".empty");
+        error.style.display = "block";
+      } else if (value.length) {
+        const error = fieldContainer.querySelector(".symbols");
+        error.style.display = "block";
+      }
+      emailValidation = false;
+      input.classList.remove("valid");
+      input.classList.add("invalid");
+    }
+  };
 
   formButton.addEventListener("click", e => {
 
     handleTextInput(".firstName", "FirstName");
     handleTextInput(".lastName", "LastName");
     handleTextInput(".nick", "Nick");
-    // handleEmail(".e-mail", "Email");
+    handleEmail(".e-mail", "Email");
 
     handleCheckbox("#agreement");
     // handleFiles("#music-file", "audio-file");
@@ -173,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // }
     e.preventDefault();
 
-    if (textInputvalidation && extraFieldsvalidation && agreementValidation && emailValidation) {
+    if (textInputvalidation && agreementValidation && emailValidation && numberValidation) {
       axios({
         method: 'post',
         data: formData,
