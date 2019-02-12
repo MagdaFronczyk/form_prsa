@@ -1,348 +1,358 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin');
 
 * {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 #nowa-tradycja-form-main {
-  background: url("//static.prsa.pl/c0466f07-06e1-49da-8c5d-28bb67647da6.file") no-repeat center center fixed;
-  background-size: cover;
+    background: url("//static.prsa.pl/c0466f07-06e1-49da-8c5d-28bb67647da6.file") no-repeat center center fixed;
+    background-size: cover;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_field .error-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_field .error-message {
-  color: #DF0546;
-  font-size: 11px;
-  display: none;
+    color: #DF0546;
+    font-size: 11px;
+    display: none;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form-section {
-  height: auto;
-  font-family: 'Cabin', sans-serif;
-  color: #e4e4e4;
-  padding-top: 3%;
-  padding-bottom: 3%;
-  overflow: hidden;
+    height: auto;
+    font-family: 'Cabin', sans-serif;
+    color: #e4e4e4;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    overflow: hidden;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form {
-  padding-top: 5%;
+    padding-top: 5%;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form-title {
-  font-size: 15px;
-  text-transform: uppercase;
-  font-weight: 700;
-  position: relative;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 700;
+    position: relative;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form-title::before {
-  content: url("//static.prsa.pl/d9601899-cf08-4417-9589-27046a8c896a.file");
-  position: absolute;
-  left: -20px;
+    content: url("//static.prsa.pl/d9601899-cf08-4417-9589-27046a8c896a.file");
+    position: absolute;
+    left: -20px;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_field {
-  font-size: 12px;
-  font-weight: 700;
-  padding-bottom: 2%;
+    font-size: 12px;
+    font-weight: 700;
+    padding-bottom: 2%;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_field.text-fields,
 #nowa-tradycja-form-main .nowa-tradycja-form_field.number-fields {
-  display: inline-block;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-preferred-size: 50%;
-  flex-basis: 50%;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  position: relative;
+    display: inline-block;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-preferred-size: 50%;
+    flex-basis: 50%;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    position: relative;
 }
 
 #nowa-tradycja-form-main input::-webkit-input-placeholder {
-  color: #DF0546;
+    color: #DF0546;
 }
 
 #nowa-tradycja-form-main input:-ms-input-placeholder {
-  color: #DF0546;
+    color: #DF0546;
 }
 
 #nowa-tradycja-form-main input::-ms-input-placeholder {
-  color: #DF0546;
+    color: #DF0546;
 }
 
 #nowa-tradycja-form-main input::placeholder {
-  color: #DF0546;
+    color: #DF0546;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_field.text-fields input,
 #nowa-tradycja-form-main .nowa-tradycja-form_field.number-fields input {
-  padding: 10px;
-  width: 100% !important;
-  background: rgba(255, 255, 255, 0.1);
-  border: transparent;
-  height: 45px;
-  font-family: 'Cabin', sans-serif;
-  color: #e4e4e4;
-  font-weight: 500;
-  font-size: 16px;
-  -webkit-transition: .5s ease-out;
-  -o-transition: .5s ease-out;
-  transition: .5s ease-out;
+    padding: 10px;
+    width: 100% !important;
+    background: rgba(255, 255, 255, 0.1);
+    border: transparent;
+    height: 45px;
+    font-family: 'Cabin', sans-serif;
+    color: #e4e4e4;
+    font-weight: 500;
+    font-size: 16px;
+    -webkit-transition: .5s ease-out;
+    -o-transition: .5s ease-out;
+    transition: .5s ease-out;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_field.text-fields input.invalid,
 #nowa-tradycja-form-main .nowa-tradycja-form_field.number-fields input.invalid {
-  border: 2px solid #DF0546;
+    border: 2px solid #DF0546;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_field.text-fields input.valid,
 #nowa-tradycja-form-main .nowa-tradycja-form_field.number-fields input.valid {
-  background: url("//static.prsa.pl/0aa47d31-e747-4bd8-9871-62ff0a3bb6ec.file") rgba(255, 255, 255, 0.1);
-  background-repeat: no-repeat;
-  background-position: 98%;
+    background: url("//static.prsa.pl/0aa47d31-e747-4bd8-9871-62ff0a3bb6ec.file") rgba(255, 255, 255, 0.1);
+    background-repeat: no-repeat;
+    background-position: 98%;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_field.text-fields input:focus,
 #nowa-tradycja-form-main .nowa-tradycja-form_field.number-fields input:focus {
-  outline: none;
+    outline: none;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_field.text-fields label,
 #nowa-tradycja-form-main .nowa-tradycja-form_field.number-fields label {
-  padding-bottom: 3%;
+    padding-bottom: 3%;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_field.text-fields label::after,
 #nowa-tradycja-form-main .nowa-tradycja-form_field.number-fields label::after {
-  padding-bottom: 2%;
-  content: "*";
-  color: #DF0546;
+    padding-bottom: 2%;
+    content: "*";
+    color: #DF0546;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_files {
-  padding-bottom: 100px;
+    padding-bottom: 100px;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_files .nowa-tradycja-form_field {
-  padding-right: 0;
+    padding-right: 0;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_files .nowa-tradycja-form_field {
-  padding-right: 0 !important;
+    padding-right: 0 !important;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_files .button-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_files .button-container p {
-  font-family: 'Cabin', sans-serif;
-  color: #e4e4e4;
-  font-size: 17.97px;
-  font-weight: 700;
+    font-family: 'Cabin', sans-serif;
+    color: #e4e4e4;
+    font-size: 17.97px;
+    font-weight: 700;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_files .button-container .add-file-button {
-  margin-left: 10px;
-  width: 25px;
-  height: 25px;
-  background-color: #DF0546;
-  border-radius: 50%;
-  color: white;
-  border: 0;
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
+    background-color: #DF0546;
+    border-radius: 50%;
+    color: white;
+    border: 0;
+    transition: 0.5s ease-in-out;
+}
+
+#nowa-tradycja-form-main .nowa-tradycja-form_files .button-container .add-file-button:hover {
+    background-color: #e3e1df;
+    color: #e10d49;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_files input[type="file"] {
-  display: none;
+    display: none;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_files .file-field {
-  display: inline-block;
-  padding-top: 7.5px;
-  font-size: 17px;
-  text-align: center;
-  background-color: #e10d49;
-  width: 143px;
-  height: 34px;
-  outline: none;
-  border: none;
-  color: #e3e1df;
-  font-size: 18px;
-  font-family: inherit;
-  font-weight: 700;
-  -webkit-transition: .5s ease-out;
-  -o-transition: .5s ease-out;
-  transition: .5s ease-out;
+    display: inline-block;
+    padding-top: 5px;
+    text-align: center;
+    background-color: #e10d49;
+    width: 143px;
+    height: 34px;
+    outline: none;
+    border: none;
+    color: #e3e1df;
+    font-size: 18px;
+    font-family: inherit;
+    font-weight: 700;
+    -webkit-transition: .5s ease-out;
+    -o-transition: .5s ease-out;
+    transition: .5s ease-out;
 }
 
 
 #nowa-tradycja-form-main .nowa-tradycja-form_agreements {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-#nowa-tradycja-form-main .button:hover {
-  background-color: #e3e1df;
-  color: #e10d49;
-}
-
-#nowa-tradycja-form-main .nowa-tradycja-form_agreements .nowa-tradycja-form_field label {
-  vertical-align: middle;
-  display: table-cell;
-  height: 25px;
-  font-size: 12px;
-}
-
-#nowa-tradycja-form-main .checkmark-container {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  font-size: 16px;
-}
-
-#nowa-tradycja-form-main .checkmark-container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-#nowa-tradycja-form-main .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-}
-
-#nowa-tradycja-form-main .checkmark-container input:checked~.checkmark {
-  background-color: #e10d49;
-}
-
-#nowa-tradycja-form-main .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-#nowa-tradycja-form-main .checkmark-container input:checked~.checkmark:after {
-  display: block;
-}
-
-#nowa-tradycja-form-main .checkmark-container .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-#nowa-tradycja-form-main .form-button {
-  background-color: #e10d49;
-  width: 141px;
-  height: 34px;
-  outline: none;
-  border: none;
-  color: #e3e1df;
-  font-size: 18px;
-  font-family: inherit;
-  font-weight: 700;
-  margin: 0 auto;
-  text-transform: uppercase;
-  -webkit-transition: .5s ease-out;
-  -o-transition: .5s ease-out;
-  transition: .5s ease-out;
-}
-
-#nowa-tradycja-form-main label {
-  text-align: left;
-  padding: 0;
-}
-
-#nowa-tradycja-form-main input {
-  margin: 0;
-}
-
-#nowa-tradycja-form-main section {
-  margin-bottom: 0;
-}
-
-@media (min-width: 576px) {
-  #nowa-tradycja-form-main .nowa-tradycja-form {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-  }
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+}
 
-  #nowa-tradycja-form-main .nowa-tradycja-form_field:nth-child(odd) {
-    padding-right: 3%;
-  }
+#nowa-tradycja-form-main .button:hover {
+    background-color: #e3e1df;
+    color: #e10d49;
+}
 
-  #nowa-tradycja-form-main .nowa-tradycja-form-title {
-    font-size: 20px;
-  }
+#nowa-tradycja-form-main .nowa-tradycja-form_agreements .nowa-tradycja-form_field label {
+    vertical-align: middle;
+    display: table-cell;
+    height: 25px;
+    font-size: 12px;
+}
 
-  #nowa-tradycja-form-main .nowa-tradycja-form_field {
+#nowa-tradycja-form-main .checkmark-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 16px;
+}
+
+#nowa-tradycja-form-main .checkmark-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+#nowa-tradycja-form-main .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+#nowa-tradycja-form-main .checkmark-container input:checked ~ .checkmark {
+    background-color: #e10d49;
+}
+
+#nowa-tradycja-form-main .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+#nowa-tradycja-form-main .checkmark-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+#nowa-tradycja-form-main .checkmark-container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+#nowa-tradycja-form-main .form-button {
+    background-color: #e10d49;
+    width: 141px;
+    height: 34px;
+    outline: none;
+    border: none;
+    color: #e3e1df;
     font-size: 18px;
-  }
+    font-family: inherit;
+    font-weight: 700;
+    margin: 0 auto;
+    text-transform: uppercase;
+    -webkit-transition: .5s ease-out;
+    -o-transition: .5s ease-out;
+    transition: .5s ease-out;
+}
 
-  #nowa-tradycja-form-main .nowa-tradycja-form_field.file-fields label {
-    font-size: 17px
-  }
+#nowa-tradycja-form-main .form-button:hover {
+    background-color: #e3e1df;
+    color: #e10d49;
+}
 
-  #nowa-tradycja-form-main .nowa-tradycja-form_field.file-fields label {
-    padding: 10px;
-  }
+#nowa-tradycja-form-main label {
+    text-align: left;
+    padding: 0;
+}
+
+#nowa-tradycja-form-main input {
+    margin: 0;
+}
+
+#nowa-tradycja-form-main section {
+    margin-bottom: 0;
+}
+
+@media (min-width: 576px) {
+    #nowa-tradycja-form-main .nowa-tradycja-form {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+
+    #nowa-tradycja-form-main .nowa-tradycja-form_field:nth-child(odd) {
+        padding-right: 3%;
+    }
+
+    #nowa-tradycja-form-main .nowa-tradycja-form-title {
+        font-size: 20px;
+    }
+
+    #nowa-tradycja-form-main .nowa-tradycja-form_field {
+        font-size: 18px;
+    }
+
+    #nowa-tradycja-form-main .nowa-tradycja-form_field.file-fields label {
+        font-size: 17px
+    }
+
+    #nowa-tradycja-form-main .nowa-tradycja-form_field.file-fields label {
+        padding: 10px;
+    }
 
 }
 
 @media (max-width: 767px) {
-  #nowa-tradycja-form-main .nowa-tradycja-form-title {
-    padding-left: 30px;
-  }
+    #nowa-tradycja-form-main .nowa-tradycja-form-title {
+        padding-left: 30px;
+    }
 
-  #nowa-tradycja-form-main .nowa-tradycja-form-title::before {
-    left: 5px;
-  }
+    #nowa-tradycja-form-main .nowa-tradycja-form-title::before {
+        left: 5px;
+    }
 
 }

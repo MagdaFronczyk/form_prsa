@@ -2,223 +2,223 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-    crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
+    <title>Document</title>
 </head>
 
 <div id="nowa-tradycja-form-main">
 
-  <section class="nowa-tradycja-form-section container">
+    <section class="nowa-tradycja-form-section container">
 
-    <h2 class="nowa-tradycja-form-title">formularz zgłoszenia do konkursu muzyki folkowej polskiego radia s.a "nowa
-      tradycja"</h2>
+        <h2 class="nowa-tradycja-form-title">formularz zgłoszenia do konkursu muzyki folkowej polskiego radia s.a "nowa
+            tradycja"</h2>
 
-    <div class="nowa-tradycja-form">
+        <div class="nowa-tradycja-form">
 
-      <div class="nowa-tradycja-form_field text-fields firstName">
-        <label for="firstName">
-          Imię
-        </label>
-        <input type="text" name="name" id="firstName">
-        <div class="error-container">
-          <span class="error-message empty">Pole obowiązkowe</span>
-          <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
-          <span class="error-message long">Musi być krótsze niż 50 znaków</span>
-          <span class="error-message letters">Musisz używać liter</span>
+            <div class="nowa-tradycja-form_field text-fields firstName">
+                <label for="firstName">
+                    Imię
+                </label>
+                <input type="text" name="name" id="firstName">
+                <div class="error-container">
+                    <span class="error-message empty">Pole obowiązkowe</span>
+                    <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
+                    <span class="error-message long">Musi być krótsze niż 50 znaków</span>
+                    <span class="error-message letters">Musisz używać liter</span>
+                </div>
+            </div>
+
+            <div class="nowa-tradycja-form_field text-fields lastName">
+                <label for="lastName">
+                    Nazwisko
+                </label>
+                <input type="text" name="lastName" id="lastName">
+                <div class="error-container">
+                    <span class="error-message empty">Pole obowiązkowe</span>
+                    <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
+                    <span class="error-message long">Musi być krótsze niż 50 znaków</span>
+                    <span class="error-message letters">Musisz używać liter</span>
+                </div>
+            </div>
+
+            <div class="nowa-tradycja-form_field text-fields nick">
+                <label for="nick">
+                    Nazwa zespołu
+                </label>
+                <input type="text" name="nick" id="nick">
+                <div class="error-container">
+                    <span class="error-message empty">Pole obowiązkowe</span>
+                    <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
+                    <span class="error-message long">Musi być krótsze niż 50 znaków</span>
+                    <span class="error-message letters">Musisz używać liter</span>
+                </div>
+            </div>
+
+            <div class="nowa-tradycja-form_field text-fields e-mail">
+                <label for="e-mail">
+                    Email
+                </label>
+                <input type="email" name="email" id="e-mail">
+                <div class="error-container">
+                    <span class="error-message empty">Pole obowiązkowe</span>
+                    <span class="error-message symbols">Mail musi być we właściwym formacie</span>
+                </div>
+            </div>
+
+            <div class="nowa-tradycja-form_field text-fields street-name">
+                <label for="street-name">
+                    Ulica
+                </label>
+                <input type="text" name="street-name" id="street-name">
+                <div class="error-container">
+                    <span class="error-message empty">Pole obowiązkowe</span>
+                    <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
+                    <span class="error-message long">Musi być krótsze niż 50 znaków</span>
+                    <span class="error-message letters">Musisz używać liter</span>
+                </div>
+            </div>
+
+            <div class="nowa-tradycja-form_field text-fields city-name">
+                <label for="city-name">
+                    Miejscowość
+                </label>
+                <input type="text" name="city-name" id="city-name">
+                <div class="error-container">
+                    <span class="error-message empty">Pole obowiązkowe</span>
+                    <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
+                    <span class="error-message long">Musi być krótsze niż 50 znaków</span>
+                    <span class="error-message letters">Musisz używać liter</span>
+                </div>
+            </div>
+
+            <div class="nowa-tradycja-form_field number-fields zip-code">
+                <label for="zip-code">
+                    Kod pocztowy
+                </label>
+                <input type="text" name="zip-code" id="zip-code">
+                <div class="error-container">
+                    <span class="error-message empty">Pole obowiązkowe</span>
+                    <span class="error-message short">Musi zwierać conajmniej 5 cyfr</span>
+                    <span class="error-message long">Za długi</span>
+                    <span class="error-message letters">Musisz używać cyfr</span>
+                </div>
+            </div>
+
+            <div class="nowa-tradycja-form_field number-fields phone">
+                <label for="phone">
+                    Telefon
+                </label>
+                <input type="text" name="phone" id="phone">
+                <div class="error-container">
+                    <span class="error-message empty">Pole obowiązkowe</span>
+                    <span class="error-message letters">Nie możesz używać cyfr</span>
+                </div>
+            </div>
+
+            <div class="nowa-tradycja-form_field number-fields fax">
+                <label for="fax">
+                    Fax
+                </label>
+                <input type="text" name="fax" id="fax">
+                <div class="error-container">
+                    <span class="error-message empty">Pole obowiązkowe</span>
+                    <span class="error-message letters">Nie możesz używać cyfr</span>
+                </div>
+            </div>
+
+            <div class="nowa-tradycja-form_field number-fields band-count">
+                <label for="band-count">
+                    Ilość człownków zespołu
+                </label>
+                <input type="text" name="band-count" id="band-count">
+                <div class="error-container">
+                    <span class="error-message empty">Pole obowiązkowe</span>
+                    <span class="error-message letters">Nie możesz używać cyfr</span>
+                </div>
+            </div>
+
+            <div class="nowa-tradycja-form_field text-fields instruments">
+                <label for="instruments">
+                    Używane instrumenty
+                </label>
+                <input type="text" name="instruments" id="instruments">
+                <div class="error-container">
+                    <span class="error-message empty">Pole obowiązkowe</span>
+                    <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
+                    <span class="error-message long">Musi być krótsze niż 50 znaków</span>
+                    <span class="error-message letters">Musisz używać liter</span>
+                </div>
+            </div>
+
+            <div class="nowa-tradycja-form_field text-fields technical-needs">
+                <label for="technical-needs">
+                    Potrzeby techniczne
+                </label>
+                <input type="text" name="technical-needs" id="technical-needs">
+                <div class="error-container">
+                    <span class="error-message empty">Pole obowiązkowe</span>
+                    <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
+                    <span class="error-message long">Musi być krótsze niż 50 znaków</span>
+                    <span class="error-message letters">Musisz używać liter</span>
+                </div>
+            </div>
+
+            <div class="nowa-tradycja-form_field text-fields program">
+                <label for="program">
+                    Program
+                </label>
+                <input type="text" name="program" id="program">
+                <div class="error-container">
+                    <span class="error-message empty">Pole obowiązkowe</span>
+                    <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
+                    <span class="error-message long">Musi być krótsze niż 50 znaków</span>
+                    <span class="error-message letters">Musisz używać liter</span>
+                </div>
+            </div>
+
+            <div class="nowa-tradycja-form_field text-fields biografia">
+                <label for="biografia">
+                    Biografia
+                </label>
+                <input type="text" name="biografia" id="biografia">
+                <div class="error-container">
+                    <span class="error-message empty">Pole obowiązkowe</span>
+                    <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
+                    <span class="error-message long">Musi być krótsze niż 50 znaków</span>
+                    <span class="error-message letters">Musisz używać liter</span>
+                </div>
+            </div>
+
+            <div class="nowa-tradycja-form_files">
+                <div class="button-container">
+                    <p>Dodaj utwory</p>
+                    <button class="add-file-button"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
+
+            <div class="nowa-tradycja-form_agreements">
+                <div class="nowa-tradycja-form_field">
+                    <label for="agreement" class="checkmark-container">
+                        1. Oświadczam,że ...
+                        <input type="checkbox" id="agreement" name="agreement" required>
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+
+                <input type="submit" class="form-button" value="Wyślij" id="submit-button">
+            </div>
+
         </div>
-      </div>
 
-      <div class="nowa-tradycja-form_field text-fields lastName">
-        <label for="lastName">
-          Nazwisko
-        </label>
-        <input type="text" name="lastName" id="lastName">
-        <div class="error-container">
-          <span class="error-message empty">Pole obowiązkowe</span>
-          <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
-          <span class="error-message long">Musi być krótsze niż 50 znaków</span>
-          <span class="error-message letters">Musisz używać liter</span>
-        </div>
-      </div>
-
-      <div class="nowa-tradycja-form_field text-fields nick">
-        <label for="nick">
-          Nazwa zespołu
-        </label>
-        <input type="text" name="nick" id="nick">
-        <div class="error-container">
-          <span class="error-message empty">Pole obowiązkowe</span>
-          <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
-          <span class="error-message long">Musi być krótsze niż 50 znaków</span>
-          <span class="error-message letters">Musisz używać liter</span>
-        </div>
-      </div>
-
-      <div class="nowa-tradycja-form_field text-fields e-mail">
-        <label for="e-mail">
-          Email
-        </label>
-        <input type="email" name="email" id="e-mail">
-        <div class="error-container">
-          <span class="error-message empty">Pole obowiązkowe</span>
-          <span class="error-message symbols">Mail musi być we właściwym formacie</span>
-        </div>
-      </div>
-
-      <div class="nowa-tradycja-form_field text-fields street-name">
-        <label for="street-name">
-          Ulica
-        </label>
-        <input type="text" name="street-name" id="street-name">
-        <div class="error-container">
-          <span class="error-message empty">Pole obowiązkowe</span>
-          <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
-          <span class="error-message long">Musi być krótsze niż 50 znaków</span>
-          <span class="error-message letters">Musisz używać liter</span>
-        </div>
-      </div>
-
-      <div class="nowa-tradycja-form_field text-fields city-name">
-        <label for="city-name">
-          Miejscowość
-        </label>
-        <input type="text" name="city-name" id="city-name">
-        <div class="error-container">
-          <span class="error-message empty">Pole obowiązkowe</span>
-          <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
-          <span class="error-message long">Musi być krótsze niż 50 znaków</span>
-          <span class="error-message letters">Musisz używać liter</span>
-        </div>
-      </div>
-
-      <div class="nowa-tradycja-form_field number-fields zip-code">
-        <label for="zip-code">
-          Kod pocztowy
-        </label>
-        <input type="text" name="zip-code" id="zip-code">
-        <div class="error-container">
-          <span class="error-message empty">Pole obowiązkowe</span>
-          <span class="error-message short">Musi zwierać conajmniej 5 cyfr</span>
-          <span class="error-message long">Za długi</span>
-          <span class="error-message letters">Musisz używać cyfr</span>
-        </div>
-      </div>
-
-      <div class="nowa-tradycja-form_field number-fields phone">
-        <label for="phone">
-          Telefon
-        </label>
-        <input type="text" name="phone" id="phone">
-        <div class="error-container">
-          <span class="error-message empty">Pole obowiązkowe</span>
-          <span class="error-message letters">Nie możesz używać cyfr</span>
-        </div>
-      </div>
-
-      <div class="nowa-tradycja-form_field number-fields fax">
-        <label for="fax">
-          Fax
-        </label>
-        <input type="text" name="fax" id="fax">
-        <div class="error-container">
-          <span class="error-message empty">Pole obowiązkowe</span>
-          <span class="error-message letters">Nie możesz używać cyfr</span>
-        </div>
-      </div>
-
-      <div class="nowa-tradycja-form_field number-fields band-count">
-        <label for="band-count">
-          Ilość człownków zespołu
-        </label>
-        <input type="text" name="band-count" id="band-count">
-        <div class="error-container">
-          <span class="error-message empty">Pole obowiązkowe</span>
-          <span class="error-message letters">Nie możesz używać cyfr</span>
-        </div>
-      </div>
-
-      <div class="nowa-tradycja-form_field text-fields instruments">
-        <label for="instruments">
-          Używane instrumenty
-        </label>
-        <input type="text" name="instruments" id="instruments">
-        <div class="error-container">
-          <span class="error-message empty">Pole obowiązkowe</span>
-          <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
-          <span class="error-message long">Musi być krótsze niż 50 znaków</span>
-          <span class="error-message letters">Musisz używać liter</span>
-        </div>
-      </div>
-
-      <div class="nowa-tradycja-form_field text-fields technical-needs">
-        <label for="technical-needs">
-          Potrzeby techniczne
-        </label>
-        <input type="text" name="technical-needs" id="technical-needs">
-        <div class="error-container">
-          <span class="error-message empty">Pole obowiązkowe</span>
-          <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
-          <span class="error-message long">Musi być krótsze niż 50 znaków</span>
-          <span class="error-message letters">Musisz używać liter</span>
-        </div>
-      </div>
-
-      <div class="nowa-tradycja-form_field text-fields program">
-        <label for="program">
-          Program
-        </label>
-        <input type="text" name="program" id="program">
-        <div class="error-container">
-          <span class="error-message empty">Pole obowiązkowe</span>
-          <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
-          <span class="error-message long">Musi być krótsze niż 50 znaków</span>
-          <span class="error-message letters">Musisz używać liter</span>
-        </div>
-      </div>
-
-      <div class="nowa-tradycja-form_field text-fields biografia">
-        <label for="biografia">
-          Biografia
-        </label>
-        <input type="text" name="biografia" id="biografia">
-        <div class="error-container">
-          <span class="error-message empty">Pole obowiązkowe</span>
-          <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
-          <span class="error-message long">Musi być krótsze niż 50 znaków</span>
-          <span class="error-message letters">Musisz używać liter</span>
-        </div>
-      </div>
-
-      <div class="nowa-tradycja-form_files">
-
-        <div class="button-container">
-          <p>Dodaj utwory</p>
-          <button class="add-file-button"><i class="fas fa-plus"></i></button>
-        </div>
-      </div>
-
-      <div class="nowa-tradycja-form_agreements">
-        <div class="nowa-tradycja-form_field">
-          <label for="agreement" class="checkmark-container">
-            1. Oświadczam,że ...
-            <input type="checkbox" id="agreement" name="agreement" required>
-            <span class="checkmark"></span>
-          </label>
-        </div>
-
-        <input type="submit" class="form-button" value="Wyślij" id="submit-button">
-      </div>
-
-    </div>
-
-  </section>
+    </section>
 </div>
 
 <script src="app.js"></script>
