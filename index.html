@@ -26,7 +26,7 @@
         <label for="firstName">
           Imię
         </label>
-        <input type="text" name="name" id="firstName" minlength="3" maxlength="50" required>
+        <input type="text" name="name" id="firstName">
         <div class="error-container">
           <span class="error-message empty">Pole obowiązkowe</span>
           <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
@@ -35,11 +35,11 @@
         </div>
       </div>
 
-      <div class="nowa-tradycja-form_field text-fields firstName lastName">
+      <div class="nowa-tradycja-form_field text-fields lastName">
         <label for="lastName">
           Nazwisko
         </label>
-        <input type="text" name="lastName" id="lastName" minlength="3" maxlength="50" required>
+        <input type="text" name="lastName" id="lastName">
         <div class="error-container">
           <span class="error-message empty">Pole obowiązkowe</span>
           <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
@@ -52,7 +52,7 @@
         <label for="nick">
           Nazwa zespołu
         </label>
-        <input type="text" name="nick" id="nick" minlength="3" maxlength="50" required>
+        <input type="text" name="nick" id="nick">
         <div class="error-container">
           <span class="error-message empty">Pole obowiązkowe</span>
           <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
@@ -76,7 +76,7 @@
         <label for="street-name">
           Ulica
         </label>
-        <input type="text" name="street-name" id="street-name" minlength="3" maxlength="50" required>
+        <input type="text" name="street-name" id="street-name">
         <div class="error-container">
           <span class="error-message empty">Pole obowiązkowe</span>
           <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
@@ -89,7 +89,7 @@
         <label for="city-name">
           Miejscowość
         </label>
-        <input type="text" name="city-name" id="city-name" minlength="3" maxlength="50" required>
+        <input type="text" name="city-name" id="city-name">
         <div class="error-container">
           <span class="error-message empty">Pole obowiązkowe</span>
           <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
@@ -161,7 +161,7 @@
         <label for="technical-needs">
           Potrzeby techniczne
         </label>
-        <input type="text" name="technical-needs" id="technical-needs" minlength="3" maxlength="50" required>
+        <input type="text" name="technical-needs" id="technical-needs">
         <div class="error-container">
           <span class="error-message empty">Pole obowiązkowe</span>
           <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
@@ -174,7 +174,7 @@
         <label for="program">
           Program
         </label>
-        <input type="text" name="program" id="program" minlength="3" maxlength="50" required>
+        <input type="text" name="program" id="program">
         <div class="error-container">
           <span class="error-message empty">Pole obowiązkowe</span>
           <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
@@ -187,7 +187,7 @@
         <label for="biografia">
           Biografia
         </label>
-        <input type="text" name="biografia" id="biografia" minlength="3" maxlength="50" required>
+        <input type="text" name="biografia" id="biografia">
         <div class="error-container">
           <span class="error-message empty">Pole obowiązkowe</span>
           <span class="error-message short">Musi zwierać conajmniej 3 znaki</span>
@@ -198,29 +198,10 @@
 
       <div class="nowa-tradycja-form_files">
 
-        <!-- <div class="nowa-tradycja-form_field file-fields">
-          <label for="music-file">
-            Dodaj uwtory
-            <i class="fas fa-file-upload"></i>
-          </label>
-          <input type="file" id="music-file" name="music-file" accept="audio/*" required multiple>
+        <div class="button-container">
+          <p>Dodaj utwory</p>
+          <button class="add-file-button"><i class="fas fa-plus"></i></button>
         </div>
-
-        <div class="nowa-tradycja-form_field file-fields">
-          <label for="image-file">
-            Dodaj zdjęcia
-            <i class="fas fa-file-upload"></i>
-          </label>
-          <input type="file" id="image-file" name="image-file" accept="image/*" required multiple>
-        </div>
-
-        <div class="nowa-tradycja-form_field file-fields">
-          <label for="document-file">
-            Dodaj Formularz PDF
-            <i class="fas fa-file-upload"></i>
-          </label>
-          <input type="file" id="document-file" name="document-file" accept=".pdf">
-        </div> -->
       </div>
 
       <div class="nowa-tradycja-form_agreements">
@@ -232,7 +213,7 @@
           </label>
         </div>
 
-        <input type="submit" class="button" value="Wyślij" id="submit-button">
+        <input type="submit" class="form-button" value="Wyślij" id="submit-button">
       </div>
 
     </div>

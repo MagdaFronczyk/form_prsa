@@ -11,7 +11,7 @@ namespace MultimediaForms.DTO
         public string Performer { get; set; }
 
         public HttpPostedFile Tune { get; set; }
-        [ ]
+        []
 
     }
 }
