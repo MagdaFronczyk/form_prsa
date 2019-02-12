@@ -3,11 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const addFileButton = document.querySelector("#nowa-tradycja-form-main .add-file-button");
 
   const formData = new FormData();
-  let textInputvalidation;
-  let agreementValidation;
-  let emailValidation;
-  let numberValidation;
-  let audioValidation;
+  let textInputvalidation, agreementValidation, emailValidation, numberValidation, audioValidation;
 
   addFileButton.addEventListener("click", (e) => {
     const mainContainer = document.querySelector(".nowa-tradycja-form_files");
@@ -20,12 +16,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const errorContainer = document.createElement("div");
       const errorEmpty = document.createElement("span");
       const errorShort = document.createElement("span");
+      const errorLetters = document.createElement("span");
+      errorLetters.classList.add("error-message", "letters");
+      errorLetters.innerHTML = "Nie możesz używać liczb"
       errorShort.classList.add("error-message", "short");
       errorShort.innerHTML = "Musi zwierać conajmniej 3 znaki";
       errorEmpty.innerHTML = "Pole obowiązkowe";
       errorContainer.classList.add("error-container");
       errorEmpty.classList.add("error-message", "empty");
-      errorContainer.append(errorEmpty);
+      errorContainer.append(errorEmpty, errorShort, errorLetters);
       newLabel.setAttribute("for", id);
       newLabel.innerHTML = label;
       newInput.setAttribute("id", id);
@@ -53,37 +52,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const handleTextInput = (selector, key) => {
 
-    const fieldContainer = document.querySelector(selector);
-    const input = fieldContainer.querySelector(`${selector} input`);
-    const value = input.value;
+    const fieldContainers = document.querySelectorAll(selector);
 
-    if (!value.length || value.length < 3 || value.length > 50 || !isNaN(value)) {
-      input.classList.remove("valid");
-      input.classList.add("invalid");
-      if (!value.length) {
-        const error = fieldContainer.querySelector(".empty");
-        error.style.display = "block";
-      } else if (value.length && value.length < 3 && isNaN(value)) {
-        const error = fieldContainer.querySelector(".short");
-        error.style.display = "block";
-      } else if (value.length > 50 && isNaN(value)) {
-        const error = fieldContainer.querySelector(".long");
-        error.style.display = "block";
-      } else if (!isNaN(value)) {
-        const error = fieldContainer.querySelector(".letters");
-        error.style.display = "block";
+    fieldContainers.forEach(container => {
+      const input = container.querySelector(`${selector} input`);
+      const value = input.value
+
+      if (!value.length || value.length < 3 || value.length > 50 || !isNaN(value)) {
+        input.classList.remove("valid");
+        input.classList.add("invalid");
+        if (!value.length) {
+          const error = container.querySelector(".empty");
+          error.style.display = "block";
+        } else if (value.length && value.length < 3 && isNaN(value)) {
+          const error = container.querySelector(".short");
+          error.style.display = "block";
+        } else if (value.length > 50 && isNaN(value)) {
+          const error = container.querySelector(".long");
+          error.style.display = "block";
+        } else if (!isNaN(value)) {
+          const error = container.querySelector(".letters");
+          error.style.display = "block";
+        }
+        textInputvalidation = false;
+      } else {
+        const errors = container.querySelectorAll(".error-message");
+        errors.forEach(error => {
+          error.style.display = "none"
+        });
+        input.classList.remove("invalid");
+        input.classList.add("valid");
+        formData.append(key, value);
+        textInputvalidation = true;
       }
-      textInputvalidation = false;
-    } else {
-      const errors = fieldContainer.querySelectorAll(".error-message");
-      errors.forEach(error => {
-        error.style.display = "none"
-      });
-      input.classList.remove("invalid");
-      input.classList.add("valid");
-      formData.append(key, value);
-      textInputvalidation = true;
-    }
+    });
+
   };
 
   const handleCheckbox = (selector) => {
@@ -96,16 +99,14 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const handleFiles = (selector, name) => {
+
     const files = document.querySelector(selector).files;
 
-    if (files) {
-      audioValidation = true;
-      for (let file of files) {
-        formData.append(name, file);
-      }
-    } else {
-      audioValidation = false;
+    audioValidation = true;
+    for (let file of files) {
+      formData.append(name, file);
     }
+
 
   };
 
@@ -129,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const fieldContainer = document.querySelector(selector);
       const input = fieldContainer.querySelector(`${selector} input`);
       const value = input.value;
+
 
       if (!value.length || value.length < 3 || value.length > 50 || !isNaN(value)) {
         input.classList.remove("valid");
@@ -193,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const input = fieldContainer.querySelector(`${selector} input`);
       const value = input.value;
 
-      if (!value.length || value.length !== 4 || isNaN(value)) {
+      if (!value.length || value.length !== 5 || isNaN(value)) {
         input.classList.remove("valid");
         input.classList.add("invalid");
         numberValidation = false;
@@ -269,15 +271,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   formButton.addEventListener("click", e => {
 
+    const audioFiles = document.querySelectorAll("#music-file");
+    audioFiles.forEach(input => {
+      if (input) {
+        handleTextInput(".title", "SongTitle");
+        handleTextInput(".author", "SongAuthor");
+        handleTextInput(".artist", "SongArtist");
+      };
+      if (input.files.length > 0) {
+        handleFiles(input.id, "audio-file");
+      }
+    });
+
     handleTextInput(".firstName", "FirstName");
     handleTextInput(".lastName", "LastName");
     handleTextInput(".nick", "Nick");
-    handleTextInput(".title", "SongTitle");
-    handleTextInput(".author", "SongAuthor");
-    handleTextInput(".artist", "SongArtist");
     handleEmail(".e-mail", "Email");
     handleCheckbox("#agreement");
-    handleFiles("#music-file", "audio-file");
     handleExtraFields();
 
     for (let el of formData.entries()) {
