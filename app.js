@@ -98,17 +98,16 @@ document.addEventListener("DOMContentLoaded", () => {
     formData.append("rulesJson", rulesJson);
   };
 
-  const handleFiles = (selector, name) => {
+  // const handleFiles = (selector, name) => {
 
-    const files = document.querySelector(selector).files;
+  //   const files = document.querySelector(selector).files;
 
-    audioValidation = true;
-    for (let file of files) {
-      formData.append(name, file);
-    }
+  //   audioValidation = true;
+  //   for (let file of files) {
+  //     formData.append(name, file);
+  //   }
 
-
-  };
+  // };
 
   const handleExtraFields = () => {
 
@@ -194,11 +193,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const fieldContainer = document.querySelector(selector);
       const input = fieldContainer.querySelector(`${selector} input`);
       const value = input.value;
+      numberValidation = false;
 
-      if (!value.length || value.length !== 5 || isNaN(value)) {
+      if (value.length && value.length === 5 && !isNaN(value)) {
+        const errors = fieldContainer.querySelectorAll(".error-message");
+        errors.forEach(error => {
+          error.style.display = "none"
+        });
+        input.classList.remove("invalid");
+        input.classList.add("valid");
+        extraFields[key] = value;
+        numberValidation = true;
+      } else {
         input.classList.remove("valid");
         input.classList.add("invalid");
-        numberValidation = false;
+
         if (!value.length) {
           const error = fieldContainer.querySelector(".empty");
           error.style.display = "block";
@@ -212,15 +221,6 @@ document.addEventListener("DOMContentLoaded", () => {
           const error = fieldContainer.querySelector(".long");
           error.style.display = "block";
         }
-      } else {
-        const errors = fieldContainer.querySelectorAll(".error-message");
-        errors.forEach(error => {
-          error.style.display = "none"
-        });
-        input.classList.remove("invalid");
-        input.classList.add("valid");
-        extraFields[key] = value;
-        numberValidation = true;
       }
 
     };
@@ -272,16 +272,29 @@ document.addEventListener("DOMContentLoaded", () => {
   formButton.addEventListener("click", e => {
 
     const audioFiles = document.querySelectorAll("#music-file");
+    const songs = [];
+
     audioFiles.forEach(input => {
+      audioValidation = false;;
+
       if (input) {
-        handleTextInput(".title", "SongTitle");
-        handleTextInput(".author", "SongAuthor");
-        handleTextInput(".artist", "SongArtist");
+        handleTextInput("#nowa-tradycja-form-main .nowa-tradycja-form_files .title", "SongTitle");
+        handleTextInput("#nowa-tradycja-form-main .nowa-tradycja-form_files .author", "SongAuthor");
+        handleTextInput("#nowa-tradycja-form-main .nowa-tradycja-form_files .artist", "SongArtist");
       };
       if (input.files.length > 0) {
-        handleFiles(input.id, "audio-file");
+        const files = input.files;
+        audioValidation = true;
+
+        for (let file of files) {
+          songs.push(file);
+
+        }
+        audioValidation = true;
       }
     });
+
+    formData.append("audio-file", songs);
 
     handleTextInput(".firstName", "FirstName");
     handleTextInput(".lastName", "LastName");
