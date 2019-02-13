@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     addFileButton.addEventListener("click", () => {
         const mainContainer = document.querySelector(".nowa-tradycja-form_files");
 
+        let counter = document.querySelectorAll(`#nowa-tradycja-form-main .nowa-tradycja-form_files input[type="file"]`).length;
+
         const addTextField = (id, className, label) => {
             const newInput = document.createElement("input");
             const newLabel = document.createElement("label");
@@ -31,19 +33,18 @@ document.addEventListener("DOMContentLoaded", () => {
             newInput.setAttribute("type", "text");
             container.append(newLabel, newInput, errorContainer);
             mainContainer.append(container);
-
         };
 
-        addTextField("title", "title", "Title");
-        addTextField("artist", "artist", "Artysta");
-        addTextField("author", "author", "Autor");
+        addTextField(`title${counter}`, `title${counter}`, "Title");
+        addTextField(`artist${counter}`, `artist${counter}`, "Artysta");
+        addTextField(`author${counter}`, `author${counter}`, "Autor");
 
         const newMusicFileInput = document.createElement("input");
         const newMusicFileLabel = document.createElement("label");
         newMusicFileLabel.innerHTML = "Przeglądaj";
         newMusicFileInput.setAttribute("type", "file");
-        newMusicFileInput.setAttribute("id", "music-file");
-        newMusicFileLabel.setAttribute("for", "music-file");
+        newMusicFileInput.setAttribute("id", `music-file${counter}`);
+        newMusicFileLabel.setAttribute("for", `music-file${counter}`);
         newMusicFileLabel.classList.add("file-field");
 
         mainContainer.append(newMusicFileLabel, newMusicFileInput);
@@ -271,22 +272,23 @@ document.addEventListener("DOMContentLoaded", () => {
     formButton.addEventListener("click", e => {
 
         const files = document.querySelectorAll("[type=\"file\"]");
-        console.log(files[0].files);
-        console.log(files[1].files);
+        const songs = [];
 
-        files.forEach(input => {
+        files.forEach((input, index) => {
+            console.log(index);
             if (input) {
-                handleTextInput("#nowa-tradycja-form-main .nowa-tradycja-form_files .title", "SongTitle");
-                handleTextInput("#nowa-tradycja-form-main .nowa-tradycja-form_files .author", "SongAuthor");
-                handleTextInput("#nowa-tradycja-form-main .nowa-tradycja-form_files .artist", "SongArtist");
+                handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .title${index}`, `SongTitle${index}`);
+                handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .author${index}`, `SongAuthor${index}`);
+                handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .artist${index}`, `SongArtist${index}`);
             }
 
-            console.log(input.value);
-            // handleFiles(`#${input.id}`, "audio-file");
-            formData.append("audio-file", input.value);
-            audioValidation = true;
+            if (input.value) {
+                songs.push(input.value)
+                audioValidation = true
+            };
         });
 
+        formData.append("audio-files", songs);
         handleTextInput(".firstName", "FirstName");
         handleTextInput(".lastName", "LastName");
         handleTextInput(".nick", "Nick");
