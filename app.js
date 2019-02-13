@@ -1,10 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
     const formButton = document.querySelector("#nowa-tradycja-form-main .form-button");
     const addFileButton = document.querySelector("#nowa-tradycja-form-main .add-file-button");
-    const removeFileButton = document.querySelector("#nowa-tradycja-form-main .remove-file-button")
+    const removeFileButton = document.querySelector("#nowa-tradycja-form-main .remove-file-button");
 
     const formData = new FormData();
     let textValidation, agreementValidation, emailValidation, numberValidation, audioValidation;
+
+    for (let el of formData.entries()) {
+        console.log(el);
+    }
 
     removeFileButton.addEventListener("click", () => {
         const fileContainer = document.querySelector("#nowa-tradycja-form-main .nowa-tradycja-form_files");
@@ -61,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
         newFileInput.addEventListener("change", () => {
             if (newFileInput.files.length > 0) {
                 sentFileTitle.innerHTML = newFileInput.files[0].name;
-            };
+            }
         });
         fileContainer.append(newFileInput, newFileLabel, sentFileTitle);
 
@@ -207,8 +211,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const input = fieldContainer.querySelector(`${selector} input`);
             const value = input.value;
 
-            console.log(value[2])
-
             if (value.length && value.length === 6 && value[2].indexOf("-") > -1) {
                 const errors = fieldContainer.querySelectorAll(".error-message");
                 errors.forEach(error => {
@@ -283,15 +285,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    function clearForm() {
-        var inputsToClear = document.querySelectorAll('.nowa-tradycja-form_field input');
-        inputsToClear.forEach(function (el) {
+    const clearForm = () => {
+        const inputsToClear = document.querySelectorAll(".nowa-tradycja-form_field input");
+        inputsToClear.forEach(el => {
             el.value = null;
-            el.classList.remove('valid');
+            el.classList.remove("valid");
         });
-    }
+    };
 
-    formButton.addEventListener("click", e => {
+    const clearFormData = () => {
+        for (let pair of formData.entries()) {
+            formData.delete(pair[0]);
+        }
+        // for (let key of formData.keys()) {
+        //     formData.delete(key);
+        // }
+    };
+
+    formButton.addEventListener("click", () => {
 
         const files = document.querySelectorAll("[type='file']");
         files.forEach((input, index) => {
@@ -305,12 +316,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             if (input.files.length > 0) {
-                ;
                 audioValidation = true;
                 sentFileTitle.style.display = "block";
                 sentFileTitle.innerHTML = input.files[0].name;
                 formData.append(`audio-file${index}`, input.files[0]);
-            };
+            }
         });
 
 
@@ -325,14 +335,13 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log(el);
         }
         if (textValidation && agreementValidation && emailValidation && numberValidation && audioValidation) {
-            console.log(textValidation, agreementValidation, emailValidation, numberValidation, audioValidation)
+            console.log(textValidation, agreementValidation, emailValidation, numberValidation, audioValidation);
             axios({
                 method: "post",
                 data: formData,
                 url: "http://localhost:55899/saveform"
-            }).then(clearForm(), console.log("Validated"))
+            }).then(clearForm(), clearFormData(), console.log("Validated"));
         }
-
     });
 
 });
