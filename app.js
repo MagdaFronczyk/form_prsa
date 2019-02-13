@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addFileButton.addEventListener("click", () => {
         const mainContainer = document.querySelector(".nowa-tradycja-form_files");
         const fieldsContainer = document.createElement("div");
+        fieldsContainer.classList.add("fields-container");
 
         let counter = document.querySelectorAll(`#nowa-tradycja-form-main .nowa-tradycja-form_files input[type="file"]`).length;
 
@@ -307,11 +308,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // }
     };
 
-    const removeAllFiles = () => {
-        const fileContainer = document.querySelector("#nowa-tradycja-form-main .nowa-tradycja-form_files");
-        while (fileContainer.firstChild) {
-            fileContainer.removeChild(fileContainer.firstChild);
-        }
+    const removeAllFilesContainers = () => {
+        const fileContainer = document.querySelectorAll("#nowa-tradycja-form-main .fields-container");
+        fileContainer.forEach(conatiner => conatiner.remove());
     };
 
     formButton.addEventListener("click", () => {
@@ -348,7 +347,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 method: "post",
                 data: formData,
                 url: "http://localhost:55899/saveform"
-            }).then(clearForm(), clearFormData(), removeAllFiles(), console.log("Validated"));
+            })
+                .then(clearForm(), clearFormData(), removeAllFilesContainers(), console.log("Validated"));
         }
     });
 
