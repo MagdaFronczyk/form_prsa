@@ -1,12 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
     const formButton = document.querySelector("#nowa-tradycja-form-main .form-button");
     const addFileButton = document.querySelector("#nowa-tradycja-form-main .add-file-button");
+    const removeFileButton = document.querySelector("#nowa-tradycja-form-main .remove-file-button")
 
     const formData = new FormData();
     let textValidation, agreementValidation, emailValidation, numberValidation, audioValidation;
 
+    removeFileButton.addEventListener("click", () => {
+        const fileContainer = document.querySelector("#nowa-tradycja-form-main .nowa-tradycja-form_files");
+        fileContainer.lastChild.remove();
+
+    });
+
     addFileButton.addEventListener("click", () => {
         const mainContainer = document.querySelector(".nowa-tradycja-form_files");
+        const fieldsContainer = document.createElement("div");
 
         let counter = document.querySelectorAll(`#nowa-tradycja-form-main .nowa-tradycja-form_files input[type="file"]`).length;
 
@@ -14,11 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const newInput = document.createElement("input");
             const newLabel = document.createElement("label");
             const container = document.createElement("div");
-            container.classList.add("nowa-tradycja-form_field", "text-fields", className);
             const errorContainer = document.createElement("div");
             const errorEmpty = document.createElement("span");
             const errorShort = document.createElement("span");
             const errorLetters = document.createElement("span");
+            container.classList.add("nowa-tradycja-form_field", "text-fields", className);
             errorLetters.classList.add("error-message", "letters");
             errorLetters.innerHTML = "Nie możesz używać liczb";
             errorShort.classList.add("error-message", "short");
@@ -32,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
             newInput.setAttribute("id", id);
             newInput.setAttribute("type", "text");
             container.append(newLabel, newInput, errorContainer);
-            mainContainer.append(container);
+            fieldsContainer.append(container);
         };
 
         addTextField(`title${counter}`, `title${counter}`, "Title");
@@ -55,9 +63,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 sentFileTitle.innerHTML = newFileInput.files[0].name;
             };
         });
-        fileContainer.append(newFileInput, newFileLabel, sentFileTitle)
+        fileContainer.append(newFileInput, newFileLabel, sentFileTitle);
 
-        mainContainer.append(fileContainer);
+        fieldsContainer.append(fileContainer);
+
+        mainContainer.append(fieldsContainer);
 
     });
 
