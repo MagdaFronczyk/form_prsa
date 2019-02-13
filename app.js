@@ -287,9 +287,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const clearForm = () => {
         const inputsToClear = document.querySelectorAll(".nowa-tradycja-form_field input");
+        const filesToClear = document.querySelectorAll("[type='file']");
         inputsToClear.forEach(el => {
             el.value = null;
             el.classList.remove("valid");
+        });
+
+        filesToClear.forEach(file => {
+            file.value = null;
         });
     };
 
@@ -302,12 +307,17 @@ document.addEventListener("DOMContentLoaded", () => {
         // }
     };
 
+    const removeAllFiles = () => {
+        const fileContainer = document.querySelector("#nowa-tradycja-form-main .nowa-tradycja-form_files");
+        while (fileContainer.firstChild) {
+            fileContainer.removeChild(fileContainer.firstChild);
+        }
+    };
+
     formButton.addEventListener("click", () => {
 
         const files = document.querySelectorAll("[type='file']");
         files.forEach((input, index) => {
-
-            const sentFileTitle = document.querySelector(`#nowa-tradycja-form-main .nowa-tradycja-form_files .sent-file-title${index}`);
 
             if (input) {
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .title${index}`, `SongTitle${index}`);
@@ -317,8 +327,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (input.files.length > 0) {
                 audioValidation = true;
-                sentFileTitle.style.display = "block";
-                sentFileTitle.innerHTML = input.files[0].name;
                 formData.append(`audio-file${index}`, input.files[0]);
             }
         });
@@ -340,7 +348,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 method: "post",
                 data: formData,
                 url: "http://localhost:55899/saveform"
-            }).then(clearForm(), clearFormData(), console.log("Validated"));
+            }).then(clearForm(), clearFormData(), removeAllFiles(), console.log("Validated"));
         }
     });
 
