@@ -254,7 +254,7 @@
     background-color: #eee;
 }
 
-#nowa-tradycja-form-main .checkmark-container input:checked ~ .checkmark {
+#nowa-tradycja-form-main .checkmark-container input:checked~.checkmark {
     background-color: #e10d49;
 }
 
@@ -264,7 +264,7 @@
     display: none;
 }
 
-#nowa-tradycja-form-main .checkmark-container input:checked ~ .checkmark:after {
+#nowa-tradycja-form-main .checkmark-container input:checked~.checkmark:after {
     display: block;
 }
 
@@ -313,6 +313,17 @@
 
 #nowa-tradycja-form-main section {
     margin-bottom: 0;
+}
+
+#nowa-tradycja-form-main .fa-check {
+    color: #00ff00;
+    padding-left: 10px;
+    display: none;
+}
+
+#nowa-tradycja-form-main .file-container {
+    display: flex;
+    align-items: center
 }
 
 @media (min-width: 576px) {
