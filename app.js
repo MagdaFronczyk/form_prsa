@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const imagesContainer = document.createElement("div");
         newLabel.classList.add("file-field");
         newLabel.innerHTML = "Przeglądaj";
-        imagesContainer.classList.add("file-container");
+        imagesContainer.classList.add("file-container", "image");
         newInput.setAttribute("id", "image");
         newInput.setAttribute("type", "file");
         newLabel.setAttribute("for", "image");
@@ -45,8 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         minus.classList.add("fas", "fa-minus");
         deleteButton.classList.add("remove-file-button");
         deleteButton.append(minus);
-        deleteButton.addEventListener("click", function (){
-            console.log(this);
+        deleteButton.addEventListener("click", function () {
             this.parentNode.remove();
         });
 
@@ -87,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const newFileInput = document.createElement("input");
         const newFileLabel = document.createElement("label");
         const sentFileTitle = document.createElement("p");
-        audioFileContainer.classList.add("file-container");
+        audioFileContainer.classList.add("file-container", "audio");
         sentFileTitle.classList.add(`sent-file-title${counter}`);
         newFileLabel.innerHTML = "Przeglądaj";
         newFileInput.setAttribute("type", "file");
@@ -344,19 +343,24 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     formButton.addEventListener("click", () => {
-
+        audioValidation = false;
         const files = document.querySelectorAll("[type='file']");
         files.forEach((input, index) => {
 
-            if (input) {
+            if (input.parentElement.classList.contains("audio") && input) {
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .title${index}`, `SongTitle${index}`);
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .author${index}`, `SongAuthor${index}`);
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .artist${index}`, `SongArtist${index}`);
             }
 
-            if (input.files.length > 0) {
+            if (input.parentElement.classList.contains("audio") && input.files.length > 0) {
                 audioValidation = true;
                 formData.append(`audio-file${index}`, input.files[0]);
+            }
+
+            if (input && input.parentElement.classList.contains("audio")) {
+                audioValidation = true;
+                formData.append(`image-file${index}`, input.files[0]);
             }
         });
 
