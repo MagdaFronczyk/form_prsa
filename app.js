@@ -2,18 +2,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const formButton = document.querySelector("#nowa-tradycja-form-main .form-button");
     const addFileButton = document.querySelector("#nowa-tradycja-form-main .add-file-button");
     const removeFileButton = document.querySelector("#nowa-tradycja-form-main .remove-file-button");
-
+    const addImageButton = document.querySelector("#nowa-tradycja-form-main .add-image-button");
+    const removeImageButton = document.querySelector("#nowa-tradycja-form-main .remove-image-button");
     const formData = new FormData();
     let textValidation, agreementValidation, emailValidation, numberValidation, audioValidation;
 
-    for (let el of formData.entries()) {
-        console.log(el);
-    }
+    addImageButton.addEventListener("click", () => {
+        const sentFileTitle = document.createElement("p");
+        const mainContainer = document.querySelector(".nowa-tradycja-form_images");
+        const newInput = document.createElement("input");
+        const newLabel = document.createElement("label");
+        const imagesContainer = document.createElement("div");
+        newLabel.classList.add("file-field");
+        newLabel.innerHTML = "Przeglądaj";
+        imagesContainer.classList.add("file-container");
+        newInput.setAttribute("id", "image");
+        newInput.setAttribute("type", "file");
+        newLabel.setAttribute("for", "image");
+        newInput.addEventListener("change", () => {
+            if (newInput.files.length > 0) {
+                sentFileTitle.innerHTML = newInput.files[0].name;
+            }
+        });
+
+        imagesContainer.append(newInput, newLabel, sentFileTitle);
+        mainContainer.append(imagesContainer);
+    });
+
+    removeImageButton.addEventListener("click", () => {
+        const fileContainer = document.querySelector("#nowa-tradycja-form-main .nowa-tradycja-form_images .file-container");
+        if (fileContainer) {
+            fileContainer.remove();
+        }
+    });
 
     removeFileButton.addEventListener("click", () => {
-        const fileContainer = document.querySelector("#nowa-tradycja-form-main .nowa-tradycja-form_files");
-        fileContainer.lastChild.remove();
-
+        const fileContainer = document.querySelectorAll("#nowa-tradycja-form-main .nowa-tradycja-form_files .file-container");
+        fileContainer.forEach(el => {
+            el.remove();
+        })
     });
 
     addFileButton.addEventListener("click", () => {
@@ -26,12 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const addTextField = (id, className, label) => {
             const newInput = document.createElement("input");
             const newLabel = document.createElement("label");
-            const container = document.createElement("div");
+            const textInputContainer = document.createElement("div");
             const errorContainer = document.createElement("div");
             const errorEmpty = document.createElement("span");
             const errorShort = document.createElement("span");
             const errorLetters = document.createElement("span");
-            container.classList.add("nowa-tradycja-form_field", "text-fields", className);
+            textInputContainer.classList.add("nowa-tradycja-form_field", "text-fields", className);
             errorLetters.classList.add("error-message", "letters");
             errorLetters.innerHTML = "Nie możesz używać liczb";
             errorShort.classList.add("error-message", "short");
@@ -44,19 +71,20 @@ document.addEventListener("DOMContentLoaded", () => {
             newLabel.innerHTML = label;
             newInput.setAttribute("id", id);
             newInput.setAttribute("type", "text");
-            container.append(newLabel, newInput, errorContainer);
-            fieldsContainer.append(container);
+            textInputContainer.append(newLabel, newInput, errorContainer);
+            fieldsContainer.appendChild(textInputContainer);
         };
 
         addTextField(`title${counter}`, `title${counter}`, "Title");
         addTextField(`artist${counter}`, `artist${counter}`, "Artysta");
         addTextField(`author${counter}`, `author${counter}`, "Autor");
 
-        const fileContainer = document.createElement("div");
+
+        const audioFileContainer = document.createElement("div");
         const newFileInput = document.createElement("input");
         const newFileLabel = document.createElement("label");
         const sentFileTitle = document.createElement("p");
-        fileContainer.classList.add("file-container");
+        audioFileContainer.classList.add("file-container");
         sentFileTitle.classList.add(`sent-file-title${counter}`);
         newFileLabel.innerHTML = "Przeglądaj";
         newFileInput.setAttribute("type", "file");
@@ -68,10 +96,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 sentFileTitle.innerHTML = newFileInput.files[0].name;
             }
         });
-        fileContainer.append(newFileInput, newFileLabel, sentFileTitle);
+        audioFileContainer.append(newFileInput, newFileLabel, sentFileTitle);
 
-        fieldsContainer.append(fileContainer);
-
+        fieldsContainer.append(audioFileContainer);
         mainContainer.append(fieldsContainer);
 
     });
@@ -344,10 +371,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (textValidation && agreementValidation && emailValidation && numberValidation && audioValidation) {
             console.log(textValidation, agreementValidation, emailValidation, numberValidation, audioValidation);
             axios({
-                method: "post",
-                data: formData,
-                url: "http://localhost:55899/saveform"
-            })
+                    method: "post",
+                    data: formData,
+                    url: "http://localhost:55899/saveform"
+                })
                 .then(clearForm(), clearFormData(), removeAllFilesContainers(), console.log("Validated"));
         }
     });
