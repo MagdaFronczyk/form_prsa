@@ -10,19 +10,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const deleteButton = document.createElement("button");
         const minus = document.createElement("i");
-        minus.classList.add("fas");
-        minus.classList.add("fa-minus");
-        deleteButton.classList.add("remove-image-button");
-        deleteButton.appendChild(minus);
-        deleteButton.addEventListener("click", function () {
-            this.previousElementSibling.remove();
-            this.remove();
-        });
         const sentImageTitle = document.createElement("p");
         const mainContainer = document.querySelector(".nowa-tradycja-form_images");
         const newInput = document.createElement("input");
         const newLabel = document.createElement("label");
         const imagesContainer = document.createElement("div");
+        const imageFieldContainer = document.createElement("div");
+        imageFieldContainer.classList.add("image-fields-container");
+        minus.classList.add("fas");
+        minus.classList.add("fa-minus");
+        deleteButton.classList.add("remove-image-button");
+        deleteButton.appendChild(minus);
+        deleteButton.addEventListener("click", function () {
+            this.parentNode.remove();
+        });
         sentImageTitle.classList.add(`sent-image-title${counter}`);
         newLabel.classList.add("file-field");
         newLabel.innerHTML = "Przeglądaj";
@@ -40,8 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
         imagesContainer.appendChild(newInput);
         imagesContainer.appendChild(newLabel);
         imagesContainer.appendChild(sentImageTitle);
-        mainContainer.appendChild(imagesContainer);
-        mainContainer.appendChild(deleteButton);
+        imageFieldContainer.append(imagesContainer);
+        imageFieldContainer.append(deleteButton);
+        mainContainer.appendChild(imageFieldContainer);
     });
 
     addFileButton.addEventListener("click", () => {
