@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const formButton = document.querySelector("#nowa-tradycja-form-main .form-button");
     const addFileButton = document.querySelector("#nowa-tradycja-form-main .add-file-button");
-    const removeFileButton = document.querySelector("#nowa-tradycja-form-main .remove-file-button");
+    // const removeFileButton = document.querySelector("#nowa-tradycja-form-main .remove-file-button");
     const addImageButton = document.querySelector("#nowa-tradycja-form-main .add-image-button");
     const removeImageButton = document.querySelector("#nowa-tradycja-form-main .remove-image-button");
     const formData = new FormData();
@@ -36,17 +36,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    removeFileButton.addEventListener("click", () => {
-        const fileContainer = document.querySelectorAll("#nowa-tradycja-form-main .nowa-tradycja-form_files .file-container");
-        fileContainer.forEach(el => {
-            el.remove();
-        })
-    });
-
     addFileButton.addEventListener("click", () => {
         const mainContainer = document.querySelector(".nowa-tradycja-form_files");
         const fieldsContainer = document.createElement("div");
         fieldsContainer.classList.add("fields-container");
+        const deleteButton = document.createElement("button");
+        const minus = document.createElement("i");
+        minus.classList.add("fas", "fa-minus");
+        deleteButton.classList.add("remove-file-button");
+        deleteButton.append(minus);
+        deleteButton.addEventListener("click", function (){
+            console.log(this);
+            this.parentNode.remove();
+        });
 
         let counter = document.querySelectorAll(`#nowa-tradycja-form-main .nowa-tradycja-form_files input[type="file"]`).length;
 
@@ -58,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const errorEmpty = document.createElement("span");
             const errorShort = document.createElement("span");
             const errorLetters = document.createElement("span");
+
             textInputContainer.classList.add("nowa-tradycja-form_field", "text-fields", className);
             errorLetters.classList.add("error-message", "letters");
             errorLetters.innerHTML = "Nie możesz używać liczb";
@@ -72,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
             newInput.setAttribute("id", id);
             newInput.setAttribute("type", "text");
             textInputContainer.append(newLabel, newInput, errorContainer);
-            fieldsContainer.appendChild(textInputContainer);
+            fieldsContainer.append(textInputContainer);
         };
 
         addTextField(`title${counter}`, `title${counter}`, "Title");
@@ -98,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         audioFileContainer.append(newFileInput, newFileLabel, sentFileTitle);
 
-        fieldsContainer.append(audioFileContainer);
+        fieldsContainer.append(audioFileContainer, deleteButton);
         mainContainer.append(fieldsContainer);
 
     });

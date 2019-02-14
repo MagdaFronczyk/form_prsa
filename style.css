@@ -163,13 +163,14 @@
     color: #e4e4e4;
     font-size: 17.97px;
     font-weight: 700;
+    margin-right: 10px;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_files .button-container .add-file-button,
 .remove-file-button,
 .add-image-button,
 .remove-image-button {
-    margin-left: 10px;
+    margin-right: 10px;
     width: 25px;
     height: 25px;
     background-color: #DF0546;
@@ -177,6 +178,10 @@
     color: white;
     border: 0;
     transition: 0.5s ease-in-out;
+}
+
+#nowa-tradycja-form-main .nowa-tradycja-form_files .remove-file-button {
+    margin-top: 10px;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_files .button-container .add-file-button:hover,
