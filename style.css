@@ -136,6 +136,7 @@
 
 #nowa-tradycja-form-main .nowa-tradycja-form_files {
     padding-bottom: 100px;
+    -ms-flex-preferred-size: 50%;
     flex-basis: 50%;
 }
 
@@ -177,10 +178,13 @@
     border-radius: 50%;
     color: white;
     border: 0;
+    -webkit-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
     transition: 0.5s ease-in-out;
 }
 
-#nowa-tradycja-form-main .nowa-tradycja-form_files .remove-file-button {
+#nowa-tradycja-form-main .nowa-tradycja-form_files .remove-file-button,
+#nowa-tradycja-form-main .nowa-tradycja-form_images .remove-image-button {
     margin-top: 10px;
 }
 
@@ -338,7 +342,11 @@
 
 #nowa-tradycja-form-main .file-container {
     padding-top: 3%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center
 }
 

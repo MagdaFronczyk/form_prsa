@@ -1,13 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
     const formButton = document.querySelector("#nowa-tradycja-form-main .form-button");
     const addFileButton = document.querySelector("#nowa-tradycja-form-main .add-file-button");
-    // const removeFileButton = document.querySelector("#nowa-tradycja-form-main .remove-file-button");
     const addImageButton = document.querySelector("#nowa-tradycja-form-main .add-image-button");
     const removeImageButton = document.querySelector("#nowa-tradycja-form-main .remove-image-button");
     const formData = new FormData();
     let textValidation, agreementValidation, emailValidation, numberValidation, audioValidation;
 
     addImageButton.addEventListener("click", () => {
+        const deleteButton = document.createElement("button");
+        const minus = document.createElement("i");
+        minus.classList.add("fas", "fa-minus");
+        deleteButton.classList.add("remove-image-button");
+        deleteButton.append(minus);
+        deleteButton.addEventListener("click", function () {
+            this.previousElementSibling.remove();
+            this.remove();
+        });
         const sentFileTitle = document.createElement("p");
         const mainContainer = document.querySelector(".nowa-tradycja-form_images");
         const newInput = document.createElement("input");
@@ -26,14 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         imagesContainer.append(newInput, newLabel, sentFileTitle);
-        mainContainer.append(imagesContainer);
-    });
-
-    removeImageButton.addEventListener("click", () => {
-        const fileContainer = document.querySelector("#nowa-tradycja-form-main .nowa-tradycja-form_images .file-container");
-        if (fileContainer) {
-            fileContainer.remove();
-        }
+        mainContainer.append(imagesContainer, deleteButton);
     });
 
     addFileButton.addEventListener("click", () => {
@@ -99,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
         audioFileContainer.append(newFileInput, newFileLabel, sentFileTitle);
-
         fieldsContainer.append(audioFileContainer, deleteButton);
         mainContainer.append(fieldsContainer);
 
