@@ -2,9 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const formButton = document.querySelector("#nowa-tradycja-form-main .form-button");
     const addFileButton = document.querySelector("#nowa-tradycja-form-main .add-file-button");
     const addImageButton = document.querySelector("#nowa-tradycja-form-main .add-image-button");
+
+    //initate validation flags
+
     let textValidation, agreementValidation, emailValidation, numberValidation, fileValidation;
 
-    //dynamically add image containers
+    //dynamically add image containers & images
 
     addImageButton.addEventListener("click", event => {
         let counter = document.querySelectorAll(`#nowa-tradycja-form-main .nowa-tradycja-form_images input[type="file"]`).length;
@@ -49,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
     });
 
-    //dynamically add audio containers
+    //dynamically add audio containers & audio
 
     addFileButton.addEventListener("click", event => {
         const mainContainer = document.querySelector(".nowa-tradycja-form_files");
@@ -451,7 +454,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(textValidation, agreementValidation, emailValidation, numberValidation, fileValidation);
 
         if (textValidation && agreementValidation && emailValidation && numberValidation && fileValidation) {
-            
+
             console.log(textValidation, agreementValidation, emailValidation, numberValidation, fileValidation);
             axios({
                     method: "post",
