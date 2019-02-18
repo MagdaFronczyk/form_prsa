@@ -2,10 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const formButton = document.querySelector("#nowa-tradycja-form-main .form-button");
     const addFileButton = document.querySelector("#nowa-tradycja-form-main .add-file-button");
     const addImageButton = document.querySelector("#nowa-tradycja-form-main .add-image-button");
-    const formData = new FormData();
-    let textValidation, agreementValidation, emailValidation, numberValidation, audioValidation;
+    let textValidation, agreementValidation, emailValidation, numberValidation, fileValidation;
 
-    addImageButton.addEventListener("click", () => {
+    //dynamically add image containers
+
+    addImageButton.addEventListener("click", event => {
         let counter = document.querySelectorAll(`#nowa-tradycja-form-main .nowa-tradycja-form_images input[type="file"]`).length;
 
         const deleteButton = document.createElement("button");
@@ -44,9 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
         imageFieldContainer.append(imagesContainer);
         imageFieldContainer.append(deleteButton);
         mainContainer.appendChild(imageFieldContainer);
+
+        event.preventDefault();
     });
 
-    addFileButton.addEventListener("click", () => {
+    //dynamically add audio containers
+
+    addFileButton.addEventListener("click", event => {
         const mainContainer = document.querySelector(".nowa-tradycja-form_files");
         const fieldsContainer = document.createElement("div");
         fieldsContainer.classList.add("fields-container");
@@ -97,9 +102,9 @@ document.addEventListener("DOMContentLoaded", () => {
             fieldsContainer.appendChild(textInputContainer);
         };
 
-        addTextField(`title${counter}`, `title${counter}`, "Title");
-        addTextField(`artist${counter}`, `artist${counter}`, "Artysta");
-        addTextField(`author${counter}`, `author${counter}`, "Autor");
+        addTextField(`title${counter}`, `title${counter}`, "Tytuł");
+        addTextField(`artist${counter}`, `artist${counter}`, "Autor");
+        addTextField(`author${counter}`, `author${counter}`, "Wykonawca");
 
 
         const audioFileContainer = document.createElement("div");
@@ -126,263 +131,305 @@ document.addEventListener("DOMContentLoaded", () => {
         fieldsContainer.appendChild(deleteButton);
         mainContainer.appendChild(fieldsContainer);
 
+        event.preventDefault();
+
     });
 
-    const handleTextInput = (selector, key) => {
-
-        const fieldContainers = document.querySelectorAll(selector);
-
-        fieldContainers.forEach(container => {
-            const input = container.querySelector(`${selector} input`);
-            const value = input.value;
-
-            if (!value.length || value.length < 3 || value.length > 50 || !isNaN(value)) {
-                textValidation = false;
-                input.classList.remove("valid");
-                input.classList.add("invalid");
-                if (!value.length) {
-                    const error = container.querySelector(".empty");
-                    error.style.display = "block";
-                } else if (value.length && value.length < 3 && isNaN(value)) {
-                    const error = container.querySelector(".short");
-                    error.style.display = "block";
-                } else if (value.length > 50 && isNaN(value)) {
-                    const error = container.querySelector(".long");
-                    error.style.display = "block";
-                } else if (!isNaN(value)) {
-                    const error = container.querySelector(".letters");
-                    error.style.display = "block";
-                }
-
-            } else {
-                const errors = container.querySelectorAll(".error-message");
-                errors.forEach(error => {
-                    error.style.display = "none";
-                });
-                input.classList.remove("invalid");
-                input.classList.add("valid");
-                formData.append(key, value);
-                textValidation = true;
-            }
-        });
-
-    };
-
-    const handleCheckbox = (selector) => {
-        const checkedBoolean = document.querySelector(selector).checked;
-        agreementValidation = checkedBoolean;
-
-        if (agreementValidation) {
-            const rulesJson = JSON.stringify({
-                IsAcceptedGeneralRules: checkedBoolean
-            });
-            formData.append("rulesJson", rulesJson);
-        }
-    };
-
-    const handleExtraFields = () => {
-
-        const extraFields = {
-            AddressStreet: "",
-            AddressCity: "",
-            ZipCode: "",
-            Phone: "",
-            Fax: "",
-            BandMembersCount: "",
-            UsedInstruments: "",
-            TechnicalNeeds: "",
-            ShortProgramDescribe: "",
-            PerformerBiography: "",
-        };
-
-        const handleExtraTextInput = (selector, key) => {
-
-            const fieldContainer = document.querySelector(selector);
-            const input = fieldContainer.querySelector(`${selector} input`);
-            const value = input.value;
-
-            if (!value.length || value.length < 3 || value.length > 50 || !isNaN(value)) {
-                textValidation = false;
-                input.classList.remove("valid");
-                input.classList.add("invalid");
-                if (!value.length) {
-                    const error = fieldContainer.querySelector(".empty");
-                    error.style.display = "block";
-                } else if (value.length && value.length < 3 && isNaN(value)) {
-                    const error = fieldContainer.querySelector(".short");
-                    error.style.display = "block";
-                } else if (value.length > 50 && isNaN(value)) {
-                    const error = fieldContainer.querySelector(".long");
-                    error.style.display = "block";
-                } else if (!isNaN(value)) {
-                    const error = fieldContainer.querySelector(".letters");
-                    error.style.display = "block";
-                }
-            } else {
-                const errors = fieldContainer.querySelectorAll(".error-message");
-                errors.forEach(error => {
-                    error.style.display = "none";
-                });
-                input.classList.remove("invalid");
-                input.classList.add("valid");
-                extraFields[key] = value;
-                textValidation = true;
-            }
-        };
-
-        const handleExtraNumbers = (selector, key) => {
-            const fieldContainer = document.querySelector(selector);
-            const input = fieldContainer.querySelector(`${selector} input`);
-            const value = input.value;
-
-            if (!value.length || isNaN(value)) {
-                numberValidation = false;
-                input.classList.remove("valid");
-                input.classList.add("invalid");
-                if (!value.length) {
-                    const error = fieldContainer.querySelector(".empty");
-                    error.style.display = "block";
-                } else if (isNaN(value)) {
-                    const error = fieldContainer.querySelector(".letters");
-                    error.style.display = "block";
-                }
-
-            } else {
-                const errors = fieldContainer.querySelectorAll(".error-message");
-                errors.forEach(error => {
-                    error.style.display = "none";
-                });
-                input.classList.remove("invalid");
-                input.classList.add("valid");
-                extraFields[key] = value;
-                numberValidation = true;
-            }
-        };
-
-        const validateZipCode = (selector, key) => {
-            const fieldContainer = document.querySelector(selector);
-            const input = fieldContainer.querySelector(`${selector} input`);
-            const value = input.value;
-
-            if (value.length && value.length === 6 && value[2].indexOf("-") > -1) {
-                const errors = fieldContainer.querySelectorAll(".error-message");
-                errors.forEach(error => {
-                    error.style.display = "none";
-                });
-                input.classList.remove("invalid");
-                input.classList.add("valid");
-                extraFields[key] = value;
-                numberValidation = true;
-            } else {
-                numberValidation = false;
-                input.classList.remove("valid");
-                input.classList.add("invalid");
-
-                if (!value.length) {
-                    const error = fieldContainer.querySelector(".empty");
-                    error.style.display = "block";
-                } else if (value.length && value.length < 4) {
-                    const error = fieldContainer.querySelector(".short");
-                    error.style.display = "block";
-                } else if (value.length && value.length > 4) {
-                    const error = fieldContainer.querySelector(".long");
-                    error.style.display = "block";
-                }
-            }
-
-        };
-
-        handleExtraTextInput(".street-name", "AddressStreet");
-        handleExtraTextInput(".city-name", "AddressCity");
-        handleExtraTextInput(".instruments", "UsedInstruments");
-        handleExtraTextInput(".technical-needs", "TechnicalNeeds");
-        handleExtraTextInput(".program", "ShortProgramDescribe");
-        handleExtraTextInput(".biografia", "PerformerBiography");
-        validateZipCode(".zip-code", "ZipCode");
-        handleExtraNumbers(".phone", "Phone");
-        handleExtraNumbers(".fax", "Fax");
-        handleExtraNumbers(".band-count", "BandMembersCount");
-
-        if (numberValidation && textValidation) {
-            const extraFieldsJson = JSON.stringify(extraFields);
-            formData.append("ExtraFieldsJSON", extraFieldsJson);
-        }
-
-    };
-
-    const handleEmail = (selector, key) => {
-        const fieldContainer = document.querySelector(selector);
-        const input = fieldContainer.querySelector(`${selector} input`);
-        const value = input.value;
-
-        if (value.indexOf("@") > -1) {
-            const errors = fieldContainer.querySelectorAll(".error-message");
-            if (errors) {
-                errors.forEach(error => error.style.display = "none");
-            }
-            input.classList.remove("invalid");
-            input.classList.add("valid");
-            emailValidation = true;
-            formData.append(key, value);
-        } else {
-            emailValidation = false;
-            if (!value.length) {
-                const error = fieldContainer.querySelector(".empty");
-                error.style.display = "block";
-            } else if (value.length) {
-                const error = fieldContainer.querySelector(".symbols");
-                error.style.display = "block";
-            }
-            input.classList.remove("valid");
-            input.classList.add("invalid");
-        }
-    };
+    //clear form on correct submit
 
     const clearForm = () => {
         const inputsToClear = document.querySelectorAll(".nowa-tradycja-form_field input");
         const filesToClear = document.querySelectorAll("[type='file']");
-        inputsToClear.forEach(el => {
-            el.value = null;
-            el.classList.remove("valid");
-        });
 
-        filesToClear.forEach(file => {
-            file.value = null;
-        });
-    };
-
-    const clearFormData = () => {
-        for (let pair of formData.entries()) {
-            formData.delete(pair[0]);
+        if (inputsToClear) {
+            inputsToClear.forEach(el => {
+                el.value = null;
+                el.classList.remove("valid");
+            });
         }
-        // for (let key of formData.keys()) {
-        //     formData.delete(key);
-        // }
+
+        if (filesToClear) {
+            filesToClear.forEach(file => {
+                file.value = null;
+            });
+        }
     };
 
-    const removeAllFilesContainers = () => {
-        const fileContainer = document.querySelectorAll("#nowa-tradycja-form-main .fields-container");
-        fileContainer.forEach(conatiner => conatiner.remove());
+    // remove file containers on correct submit
+
+    const removeFilesContainers = () => {
+        const audioFileContainers = document.querySelectorAll("#nowa-tradycja-form-main .fields-container");
+        const imageFileContainers = document.querySelectorAll("#nowa-tradycja-form-main .image-fields-container");
+        audioFileContainers.forEach(conatiner => conatiner.remove());
+        imageFileContainers.forEach(container => container.remove());
     };
 
-    formButton.addEventListener("click", () => {
-        audioValidation = false;
+    //on submit do following
+
+    formButton.addEventListener("click", event => {
+
+        //create new FormData object
+
+        const formData = new FormData();
+
+        //validate and append inputs type text
+
+        const handleTextInput = (selector, key) => {
+
+            const fieldContainers = document.querySelectorAll(selector);
+
+            fieldContainers.forEach(container => {
+                const input = container.querySelector(`${selector} input`);
+                const value = input.value;
+
+                if (!value.length || value.length < 3 || value.length > 50 || !isNaN(value)) {
+                    textValidation = false;
+                    input.classList.remove("valid");
+                    input.classList.add("invalid");
+                    if (!value.length) {
+                        const error = container.querySelector(".empty");
+                        error.style.display = "block";
+                    } else if (value.length && value.length < 3 && isNaN(value)) {
+                        const error = container.querySelector(".short");
+                        error.style.display = "block";
+                    } else if (value.length > 50 && isNaN(value)) {
+                        const error = container.querySelector(".long");
+                        error.style.display = "block";
+                    } else if (!isNaN(value)) {
+                        const error = container.querySelector(".letters");
+                        error.style.display = "block";
+                    }
+
+                } else {
+                    const errors = container.querySelectorAll(".error-message");
+                    errors.forEach(error => {
+                        error.style.display = "none";
+                    });
+                    input.classList.remove("invalid");
+                    input.classList.add("valid");
+                    formData.append(key, value);
+                    textValidation = true;
+                }
+            });
+
+        };
+
+        //validate and append inputs type checkbox
+
+        const handleCheckbox = (selector) => {
+            const checkedBoolean = document.querySelector(selector).checked;
+            agreementValidation = checkedBoolean;
+
+            if (agreementValidation) {
+                const rulesJson = JSON.stringify({
+                    IsAcceptedGeneralRules: checkedBoolean
+                });
+                formData.append("rulesJson", rulesJson);
+            }
+        };
+
+        //validate and append inputs from extraFieldsJson
+
+        const handleExtraFields = () => {
+
+            const extraFields = {
+                AddressStreet: "",
+                AddressCity: "",
+                ZipCode: "",
+                Phone: "",
+                Fax: "",
+                BandMembersCount: "",
+                UsedInstruments: "",
+                TechnicalNeeds: "",
+                ShortProgramDescribe: "",
+                PerformerBiography: "",
+            };
+
+            const handleExtraTextInput = (selector, key) => {
+
+                const fieldContainer = document.querySelector(selector);
+                const input = fieldContainer.querySelector(`${selector} input`);
+                const value = input.value;
+
+                if (!value.length || value.length < 3 || value.length > 50 || !isNaN(value)) {
+                    textValidation = false;
+                    input.classList.remove("valid");
+                    input.classList.add("invalid");
+                    if (!value.length) {
+                        const error = fieldContainer.querySelector(".empty");
+                        error.style.display = "block";
+                    } else if (value.length && value.length < 3 && isNaN(value)) {
+                        const error = fieldContainer.querySelector(".short");
+                        error.style.display = "block";
+                    } else if (value.length > 50 && isNaN(value)) {
+                        const error = fieldContainer.querySelector(".long");
+                        error.style.display = "block";
+                    } else if (!isNaN(value)) {
+                        const error = fieldContainer.querySelector(".letters");
+                        error.style.display = "block";
+                    }
+                } else {
+                    const errors = fieldContainer.querySelectorAll(".error-message");
+                    errors.forEach(error => {
+                        error.style.display = "none";
+                    });
+                    input.classList.remove("invalid");
+                    input.classList.add("valid");
+                    extraFields[key] = value;
+                    textValidation = true;
+                }
+            };
+
+            const handleExtraNumbers = (selector, key) => {
+                const fieldContainer = document.querySelector(selector);
+                const input = fieldContainer.querySelector(`${selector} input`);
+                const value = input.value;
+
+                if (!value.length || isNaN(value)) {
+                    numberValidation = false;
+                    input.classList.remove("valid");
+                    input.classList.add("invalid");
+                    if (!value.length) {
+                        const error = fieldContainer.querySelector(".empty");
+                        error.style.display = "block";
+                    } else if (isNaN(value)) {
+                        const error = fieldContainer.querySelector(".letters");
+                        error.style.display = "block";
+                    }
+
+                } else {
+                    const errors = fieldContainer.querySelectorAll(".error-message");
+                    errors.forEach(error => {
+                        error.style.display = "none";
+                    });
+                    input.classList.remove("invalid");
+                    input.classList.add("valid");
+                    extraFields[key] = value;
+                    numberValidation = true;
+                }
+            };
+
+            const validateZipCode = (selector, key) => {
+                const fieldContainer = document.querySelector(selector);
+                const input = fieldContainer.querySelector(`${selector} input`);
+                const value = input.value;
+
+                if (value.length && value.length === 6 && value[2].indexOf("-") > -1) {
+                    const errors = fieldContainer.querySelectorAll(".error-message");
+                    errors.forEach(error => {
+                        error.style.display = "none";
+                    });
+                    input.classList.remove("invalid");
+                    input.classList.add("valid");
+                    extraFields[key] = value;
+                    numberValidation = true;
+                } else {
+                    numberValidation = false;
+                    input.classList.remove("valid");
+                    input.classList.add("invalid");
+
+                    if (!value.length) {
+                        const error = fieldContainer.querySelector(".empty");
+                        error.style.display = "block";
+                    } else if (value.length && value.length < 4) {
+                        const error = fieldContainer.querySelector(".short");
+                        error.style.display = "block";
+                    } else if (value.length && value.length > 4) {
+                        const error = fieldContainer.querySelector(".long");
+                        error.style.display = "block";
+                    }
+                }
+
+            };
+
+            handleExtraTextInput(".street-name", "AddressStreet");
+            handleExtraTextInput(".city-name", "AddressCity");
+            handleExtraTextInput(".instruments", "UsedInstruments");
+            handleExtraTextInput(".technical-needs", "TechnicalNeeds");
+            handleExtraTextInput(".program", "ShortProgramDescribe");
+            handleExtraTextInput(".biografia", "PerformerBiography");
+            validateZipCode(".zip-code", "ZipCode");
+            handleExtraNumbers(".phone", "Phone");
+            handleExtraNumbers(".fax", "Fax");
+            handleExtraNumbers(".band-count", "BandMembersCount");
+
+            if (numberValidation && textValidation) {
+                const extraFieldsJson = JSON.stringify(extraFields);
+                formData.append("ExtraFieldsJSON", extraFieldsJson);
+            }
+
+        };
+
+        // validate and append email
+
+        const handleEmail = (selector, key) => {
+            const fieldContainer = document.querySelector(selector);
+            const input = fieldContainer.querySelector(`${selector} input`);
+            const value = input.value;
+
+            if (value.indexOf("@") > -1) {
+                const errors = fieldContainer.querySelectorAll(".error-message");
+                if (errors) {
+                    errors.forEach(error => error.style.display = "none");
+                }
+                input.classList.remove("invalid");
+                input.classList.add("valid");
+                emailValidation = true;
+                formData.append(key, value);
+            } else {
+                emailValidation = false;
+                if (!value.length) {
+                    const error = fieldContainer.querySelector(".empty");
+                    error.style.display = "block";
+                } else if (value.length) {
+                    const error = fieldContainer.querySelector(".symbols");
+                    error.style.display = "block";
+                }
+                input.classList.remove("valid");
+                input.classList.add("invalid");
+            }
+        };
+
+        // validate and append audio % image files
+
         const files = document.querySelectorAll("[type='file']");
+        const audioFiles = document.querySelectorAll(".audio [type='file']");
+
+        fileValidation = false;
+
         files.forEach((input, index) => {
 
-            if (input.parentElement.classList.contains("audio") && input) {
+            if (audioFiles.length > 0) {
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .title${index}`, `SongTitle${index}`);
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .author${index}`, `SongAuthor${index}`);
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .artist${index}`, `SongArtist${index}`);
             }
 
-            if (input.parentElement.classList.contains("audio") && input.files.length > 0) {
-                audioValidation = true;
-                formData.append(`audio-file${index}`, input.files[0]);
+            if (audioFiles.length === 0) {
+                const error = document.querySelector(".nowa-tradycja-form_files .empty");
+                error.style.display = "block";
             }
 
-            if (input && input.parentElement.classList.contains("audio")) {
-                audioValidation = true;
+            if (audioFiles.length > 5) {
+                const error = document.querySelector(".nowa-tradycja-form_files .long");
+                error.style.display = "block";
+            }
+
+            if (audioFiles.length > 0 && audioFiles.length < 3) {
+                const error = document.querySelector(".nowa-tradycja-form_files .short");
+                error.style.display = "block";
+            }
+
+            if (audioFiles.length > 2 && audioFiles.length < 6) {
+                const errors = document.querySelectorAll(".nowa-tradycja-form_files .error-message");
+                errors.forEach(error => {
+                    error.style.display = "none";
+                });
+                formData.append(`audio-file${index}`, input.files[0]);
+                fileValidation = true;
+            }
+
+            if (input && input.parentElement.classList.contains("image")) {
                 formData.append(`image-file${index}`, input.files[0]);
             }
         });
@@ -395,17 +442,23 @@ document.addEventListener("DOMContentLoaded", () => {
         handleCheckbox("#agreement");
         handleExtraFields();
 
-        // for (let el of formData.entries()) {
-        //     console.log(el);
-        // }
-        if (textValidation && agreementValidation && emailValidation && numberValidation && audioValidation) {
-            console.log(textValidation, agreementValidation, emailValidation, numberValidation, audioValidation);
+        for (let el of formData.entries()) {
+            console.log(el);
+        }
+
+        event.preventDefault();
+
+        console.log(textValidation, agreementValidation, emailValidation, numberValidation, fileValidation);
+
+        if (textValidation && agreementValidation && emailValidation && numberValidation && fileValidation) {
+            
+            console.log(textValidation, agreementValidation, emailValidation, numberValidation, fileValidation);
             axios({
                     method: "post",
                     data: formData,
                     url: "http://localhost:55899/saveform"
                 })
-                .then(clearForm(), clearFormData(), removeAllFilesContainers(), console.log("Validated"));
+                .then(clearForm(), removeFilesContainers(), console.log("Validated"));
         }
     });
 

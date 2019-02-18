@@ -118,7 +118,7 @@
                 <input type="text" name="phone" id="phone">
                 <div class="error-container">
                     <span class="error-message empty">Pole obowiązkowe</span>
-                    <span class="error-message letters">Nie możesz używać cyfr</span>
+                    <span class="error-message letters">Musisz używać cyfr</span>
                 </div>
             </div>
 
@@ -129,7 +129,7 @@
                 <input type="text" name="fax" id="fax">
                 <div class="error-container">
                     <span class="error-message empty">Pole obowiązkowe</span>
-                    <span class="error-message letters">Nie możesz używać cyfr</span>
+                    <span class="error-message letters">Musisz używać cyfr</span>
                 </div>
             </div>
 
@@ -140,7 +140,7 @@
                 <input type="text" name="band-count" id="band-count">
                 <div class="error-container">
                     <span class="error-message empty">Pole obowiązkowe</span>
-                    <span class="error-message letters">Nie możesz używać cyfr</span>
+                    <span class="error-message letters">Musisz używać cyfr</span>
                 </div>
             </div>
 
@@ -198,8 +198,13 @@
 
             <div class="nowa-tradycja-form_files">
                 <div class="button-container">
-                    <p>Dodaj utwór</p>
+                    <p>Dodaj min. 3 max. 5 utwór</p>
                     <button class="add-file-button"><i class="fas fa-plus"></i></button>
+                </div>
+                <div class="error-container">
+                    <span class="error-message empty">Dodanie utworów jest obowiązkowe</span>
+                    <span class="error-message short">Musisz dodać co najmniej 3 utwory</span>
+                    <span class="error-message long">Nie możesz dodać więcej niż 5 utworów</span>
                 </div>
             </div>
             <div class="nowa-tradycja-form_images">
@@ -217,7 +222,6 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-
                 <input type="submit" class="form-button" value="Wyślij" id="submit-button">
             </div>
 

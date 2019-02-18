@@ -22,10 +22,12 @@
     flex-direction: column;
 }
 
-#nowa-tradycja-form-main .nowa-tradycja-form_field .error-message {
+#nowa-tradycja-form-main .nowa-tradycja-form_field .error-message,
+ .nowa-tradycja-form_files .error-message{
     color: #DF0546;
     font-size: 11px;
     display: none;
+    font-weight: 700;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form-section {
@@ -134,8 +136,8 @@
     color: #DF0546;
 }
 
-#nowa-tradycja-form-main .nowa-tradycja-form_files {
-    padding-bottom: 100px;
+#nowa-tradycja-form-main .nowa-tradycja-form_files, .nowa-tradycja-form_images {
+    padding-bottom: 50px;
     -ms-flex-preferred-size: 50%;
     flex-basis: 50%;
 }
@@ -189,7 +191,7 @@
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_files .button-container .add-file-button:hover,
-.remove-file-button:hover {
+.remove-file-button:hover, .add-image-button:hover, .remove-image-button:hover {
     background-color: #e3e1df;
     color: #e10d49;
 }
