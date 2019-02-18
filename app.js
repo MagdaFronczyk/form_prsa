@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //initate validation flags
 
-    let textValidation, agreementValidation, emailValidation, numberValidation, fileValidation;
+    let textValidation, agreementValidation, emailValidation, numberValidation, audioValidation, imageValidation;
 
     //dynamically add image containers & images
 
@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         imagesContainer.classList.add("image");
         newInput.setAttribute("id", `image${counter}`);
         newInput.setAttribute("type", "file");
+        newInput.setAttribute("accept", "image/*");
         newLabel.setAttribute("for", `image${counter}`);
         newInput.addEventListener("change", () => {
             if (newInput.files.length > 0) {
@@ -119,6 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sentFileTitle.classList.add(`sent-file-title${counter}`);
         newFileLabel.innerHTML = "Przeglądaj";
         newFileInput.setAttribute("type", "file");
+        newFileInput.setAttribute("accept", "audio/*");
         newFileInput.setAttribute("id", `music-file${counter}`);
         newFileLabel.setAttribute("for", `music-file${counter}`);
         newFileLabel.classList.add("file-field");
@@ -248,13 +250,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 PerformerBiography: "",
             };
 
+            // validate extra text inputs
+
             const handleExtraTextInput = (selector, key) => {
 
                 const fieldContainer = document.querySelector(selector);
                 const input = fieldContainer.querySelector(`${selector} input`);
                 const value = input.value;
 
-                if (!value.length || value.length < 3 || value.length > 50 || !isNaN(value)) {
+                if (!value.length || value.length < 3 || value.length > 50) {
                     textValidation = false;
                     input.classList.remove("valid");
                     input.classList.add("invalid");
@@ -266,9 +270,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         error.style.display = "block";
                     } else if (value.length > 50 && isNaN(value)) {
                         const error = fieldContainer.querySelector(".long");
-                        error.style.display = "block";
-                    } else if (!isNaN(value)) {
-                        const error = fieldContainer.querySelector(".letters");
                         error.style.display = "block";
                     }
                 } else {
@@ -282,6 +283,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     textValidation = true;
                 }
             };
+
+            // validate extra number inputs
 
             const handleExtraNumbers = (selector, key) => {
                 const fieldContainer = document.querySelector(selector);
@@ -312,6 +315,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             };
 
+            // validate zip code
+
             const validateZipCode = (selector, key) => {
                 const fieldContainer = document.querySelector(selector);
                 const input = fieldContainer.querySelector(`${selector} input`);
@@ -339,6 +344,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         error.style.display = "block";
                     } else if (value.length && value.length > 4) {
                         const error = fieldContainer.querySelector(".long");
+                        error.style.display = "block";
+                    } else if (value.length && value[2].indexOf("-")) {
+                        const error = fieldContainer.querySelector(".letters");
                         error.style.display = "block";
                     }
                 }
@@ -393,48 +401,48 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
 
-        // validate and append audio % image files
+        // validate and append audio & image files
 
         const files = document.querySelectorAll("[type='file']");
         const audioFiles = document.querySelectorAll(".audio [type='file']");
+        const imageFiles = document.querySelectorAll(".image [type='file']");
 
-        fileValidation = false;
+        audioValidation = imageValidation = false;
 
         files.forEach((input, index) => {
+
+            console.log(input.files.length, input, imageFiles.files);
 
             if (audioFiles.length > 0) {
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .title${index}`, `SongTitle${index}`);
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .author${index}`, `SongAuthor${index}`);
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .artist${index}`, `SongArtist${index}`);
             }
-
-            if (audioFiles.length === 0) {
-                const error = document.querySelector(".nowa-tradycja-form_files .empty");
-                error.style.display = "block";
-            }
+            // if (input.files.length === 0) {
+            //     const error = document.querySelector(".nowa-tradycja-form_files .empty");
+            //     error.style.display = "block";
+            // }
 
             if (audioFiles.length > 5) {
                 const error = document.querySelector(".nowa-tradycja-form_files .long");
                 error.style.display = "block";
-            }
-
-            if (audioFiles.length > 0 && audioFiles.length < 3) {
+            } else if (audioFiles.length > 0 && audioFiles.length < 3) {
                 const error = document.querySelector(".nowa-tradycja-form_files .short");
                 error.style.display = "block";
-            }
-
-            if (audioFiles.length > 2 && audioFiles.length < 6) {
+            } else if (audioFiles.length > 2 && audioFiles.length < 6 && input.files[0].size > 0) {
                 const errors = document.querySelectorAll(".nowa-tradycja-form_files .error-message");
                 errors.forEach(error => {
                     error.style.display = "none";
                 });
                 formData.append(`audio-file${index}`, input.files[0]);
-                fileValidation = true;
+                audioValidation = true;
             }
 
-            if (input && input.parentElement.classList.contains("image")) {
+            if (input.parentNode.classList.contains("image") && input.files.length > 0 && input.files[0].size > 0) {
                 formData.append(`image-file${index}`, input.files[0]);
+                imageValidation = true;
             }
+
         });
 
 
@@ -451,17 +459,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         event.preventDefault();
 
-        console.log(textValidation, agreementValidation, emailValidation, numberValidation, fileValidation);
+        console.log(textValidation, agreementValidation, emailValidation, numberValidation, audioValidation, imageValidation);
 
-        if (textValidation && agreementValidation && emailValidation && numberValidation && fileValidation) {
+        if (textValidation && agreementValidation && emailValidation && numberValidation && imageValidation && audioValidation) {
 
-            console.log(textValidation, agreementValidation, emailValidation, numberValidation, fileValidation);
+            console.log(textValidation, agreementValidation, emailValidation, numberValidation, audioValidation, imageValidation);
             axios({
                     method: "post",
                     data: formData,
-                    url: "http://localhost:55899/saveform"
+                    url: "//localhost:55899/saveform"
                 })
-                .then(clearForm(), removeFilesContainers(), console.log("Validated"));
+                // .then(removeFilesContainers(), console.log("Validated"))
+                .then(res => console.log(
+                    res
+                ))
+                .catch(err => console.log(err))
         }
     });
 
