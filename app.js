@@ -284,6 +284,38 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             };
 
+            const handleExtraTextarea = (selector, key) => {
+
+                const fieldContainer = document.querySelector(selector);
+                const input = fieldContainer.querySelector(`${selector} textarea`);
+                const value = input.value;
+
+                if (!value.length || value.length < 3 || value.length > 50) {
+                    textValidation = false;
+                    input.classList.remove("valid");
+                    input.classList.add("invalid");
+                    if (!value.length) {
+                        const error = fieldContainer.querySelector(".empty");
+                        error.style.display = "block";
+                    } else if (value.length && value.length < 3 && isNaN(value)) {
+                        const error = fieldContainer.querySelector(".short");
+                        error.style.display = "block";
+                    } else if (value.length > 50 && isNaN(value)) {
+                        const error = fieldContainer.querySelector(".long");
+                        error.style.display = "block";
+                    }
+                } else {
+                    const errors = fieldContainer.querySelectorAll(".error-message");
+                    errors.forEach(error => {
+                        error.style.display = "none";
+                    });
+                    input.classList.remove("invalid");
+                    input.classList.add("valid");
+                    extraFields[key] = value;
+                    textValidation = true;
+                }
+            };
+
             // validate extra number inputs
 
             const handleExtraNumbers = (selector, key) => {
@@ -357,8 +389,8 @@ document.addEventListener("DOMContentLoaded", () => {
             handleExtraTextInput(".city-name", "AddressCity");
             handleExtraTextInput(".instruments", "UsedInstruments");
             handleExtraTextInput(".technical-needs", "TechnicalNeeds");
-            handleExtraTextInput(".program", "ShortProgramDescribe");
-            handleExtraTextInput(".biografia", "PerformerBiography");
+            handleExtraTextarea(".program", "ShortProgramDescribe");
+            handleExtraTextarea(".biografia", "PerformerBiography");
             validateZipCode(".zip-code", "ZipCode");
             handleExtraNumbers(".phone", "Phone");
             handleExtraNumbers(".fax", "Fax");

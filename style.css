@@ -93,7 +93,8 @@
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_field.text-fields input,
-#nowa-tradycja-form-main .nowa-tradycja-form_field.number-fields input {
+#nowa-tradycja-form-main .nowa-tradycja-form_field.number-fields input,
+#nowa-tradycja-form-main .nowa-tradycja-form_field textarea {
     padding: 10px;
     width: 100% !important;
     background: rgba(255, 255, 255, 0.1);
@@ -108,20 +109,27 @@
     transition: .5s ease-out;
 }
 
+#nowa-tradycja-form-main .nowa-tradycja-form_field textarea {
+    height: 150px;
+}
+
 #nowa-tradycja-form-main .nowa-tradycja-form_field.text-fields input.invalid,
-#nowa-tradycja-form-main .nowa-tradycja-form_field.number-fields input.invalid {
+#nowa-tradycja-form-main .nowa-tradycja-form_field.number-fields input.invalid,
+#nowa-tradycja-form-main .nowa-tradycja-form_field textarea.invalid {
     border: 2px solid #DF0546;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_field.text-fields input.valid,
-#nowa-tradycja-form-main .nowa-tradycja-form_field.number-fields input.valid {
+#nowa-tradycja-form-main .nowa-tradycja-form_field.number-fields input.valid,
+#nowa-tradycja-form-main .nowa-tradycja-form_field textarea.valid {
     background: url("//static.prsa.pl/0aa47d31-e747-4bd8-9871-62ff0a3bb6ec.file") rgba(255, 255, 255, 0.1);
     background-repeat: no-repeat;
     background-position: 98%;
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_field.text-fields input:focus,
-#nowa-tradycja-form-main .nowa-tradycja-form_field.number-fields input:focus {
+#nowa-tradycja-form-main .nowa-tradycja-form_field.number-fields input:focus,
+textarea {
     outline: none;
 }
 
