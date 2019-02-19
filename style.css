@@ -8,7 +8,7 @@
 }
 
 #nowa-tradycja-form-main {
-    background: url("//static.prsa.pl/c0466f07-06e1-49da-8c5d-28bb67647da6.file") no-repeat center center fixed;
+    background: url("//static.prsa.pl/9f5288d2-88f6-4c76-90c6-2515c14b64ff.file") no-repeat center center fixed;
     background-size: cover;
 }
 
@@ -23,7 +23,8 @@
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_field .error-message,
- .nowa-tradycja-form_files .error-message{
+.nowa-tradycja-form_files .error-message,
+.nowa-tradycja-form_images .error-message {
     color: #DF0546;
     font-size: 11px;
     display: none;
@@ -136,7 +137,8 @@
     color: #DF0546;
 }
 
-#nowa-tradycja-form-main .nowa-tradycja-form_files, .nowa-tradycja-form_images {
+#nowa-tradycja-form-main .nowa-tradycja-form_files,
+.nowa-tradycja-form_images {
     padding-bottom: 50px;
     -ms-flex-preferred-size: 50%;
     flex-basis: 50%;
@@ -191,7 +193,9 @@
 }
 
 #nowa-tradycja-form-main .nowa-tradycja-form_files .button-container .add-file-button:hover,
-.remove-file-button:hover, .add-image-button:hover, .remove-image-button:hover {
+.remove-file-button:hover,
+.add-image-button:hover,
+.remove-image-button:hover {
     background-color: #e3e1df;
     color: #e10d49;
 }

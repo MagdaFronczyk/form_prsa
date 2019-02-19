@@ -407,7 +407,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const audioFiles = document.querySelectorAll(".audio [type='file']");
         const imageFiles = document.querySelectorAll(".image [type='file']");
 
-        audioValidation = imageValidation = false;
+        if (files.length === 0) {
+            const errorAudio = document.querySelector(".nowa-tradycja-form_files .empty");
+            errorAudio.style.display = "block";
+            const errorImage = document.querySelector(".nowa-tradycja-form_images .empty");
+            errorImage.style.display = "block";
+        };
+
+        let audioValidation = false;
+        let imageValidation = false;
 
         files.forEach((input, index) => {
 
@@ -418,10 +426,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .author${index}`, `SongAuthor${index}`);
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .artist${index}`, `SongArtist${index}`);
             }
-            // if (input.files.length === 0) {
-            //     const error = document.querySelector(".nowa-tradycja-form_files .empty");
-            //     error.style.display = "block";
-            // }
 
             if (audioFiles.length > 5) {
                 const error = document.querySelector(".nowa-tradycja-form_files .long");
@@ -459,21 +463,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         event.preventDefault();
 
-        console.log(textValidation, agreementValidation, emailValidation, numberValidation, audioValidation, imageValidation);
-
         if (textValidation && agreementValidation && emailValidation && numberValidation && imageValidation && audioValidation) {
 
-            console.log(textValidation, agreementValidation, emailValidation, numberValidation, audioValidation, imageValidation);
             axios({
                     method: "post",
                     data: formData,
                     url: "//localhost:55899/saveform"
                 })
-                // .then(removeFilesContainers(), console.log("Validated"))
-                .then(res => console.log(
-                    res
-                ))
-                .catch(err => console.log(err))
+                .then(removeFilesContainers(), clearForm(), console.log("Validated"))
+                .catch(err => console.log(err));
         }
     });
 
