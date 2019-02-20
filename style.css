@@ -245,6 +245,17 @@ textarea {
     width: 100%;
 }
 
+#nowa-tradycja-form-main .nowa-tradycja-form_agreements .nowa-tradycja-form_agreements_link {
+    text-decoration: none;
+    color: #e3e1df;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+#nowa-tradycja-form-main .nowa-tradycja-form_agreements .nowa-tradycja-form_agreements_link:hover {
+    color: #e10d49;
+}
+
 #nowa-tradycja-form-main .button:hover {
     background-color: #e3e1df;
     color: #e10d49;

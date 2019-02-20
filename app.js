@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //initate validation flags
 
-    let textValidation, agreementValidation, emailValidation, numberValidation, audioValidation, imageValidation;
+    let textValidation, agreementValidation, emailValidation, numberValidation;
 
     //dynamically add image containers & images
 
@@ -165,25 +165,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const textAreasToClear = document.querySelectorAll(".nowa-tradycja-form_field textarea");
         const filesToClear = document.querySelectorAll("[type='file']");
 
-        if (textAreasToClear) {
-            textAreasToClear.forEach(el => {
-                el.value = null;
-                el.classList.remove("valid");
-            })
-        }
+        textAreasToClear.forEach(el => {
+            el.value = null;
+            el.classList.remove("valid");
+        })
 
-        if (inputsToClear) {
-            inputsToClear.forEach(el => {
-                el.value = null;
-                el.classList.remove("valid");
-            });
-        }
+        inputsToClear.forEach(el => {
+            el.value = null;
+            el.classList.remove("valid");
+        });
 
-        if (filesToClear) {
-            filesToClear.forEach(file => {
-                file.value = null;
-            });
-        }
+        filesToClear.forEach(file => {
+            file.value = null;
+        });
     };
 
     //on submit do following
@@ -470,8 +464,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         audioFiles.forEach((input, index) => {
 
-            console.log(document.querySelector(`#title${index}`).classList.contains("valid"));
-
             if (audioFiles.length > 0) {
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .title${index}`, `SongTitle${index}`);
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .author${index}`, `SongAuthor${index}`);
@@ -527,16 +519,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         event.preventDefault();
+        console.log(textValidation, agreementValidation, emailValidation, numberValidation, imageValidation, audioValidation);
 
         if (textValidation && agreementValidation && emailValidation && numberValidation && imageValidation && audioValidation) {
-            console.log(textValidation && agreementValidation && emailValidation && numberValidation && imageValidation && audioValidation)
-            //  JSON.stringify(formData);
+            console.log(textValidation, agreementValidation, emailValidation, numberValidation, imageValidation, audioValidation);
             axios({
                     method: "post",
                     data: formData,
                     url: "//localhost:55899/saveform"
                 })
-                .then(clearForm(), console.log("Validated"))
+                .then(resp => clearForm(), console.log("Validated"))
                 .catch(err => console.log(err));
         }
     });
