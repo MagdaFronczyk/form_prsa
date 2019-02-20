@@ -9,9 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //dynamically add image containers & images
 
-    addImageButton.addEventListener("click", event => {
+    const addImageFile = () => {
         let counter = document.querySelectorAll(`#nowa-tradycja-form-main .nowa-tradycja-form_images input[type="file"]`).length;
-
         const deleteButton = document.createElement("button");
         const minus = document.createElement("i");
         const sentImageTitle = document.createElement("p");
@@ -47,15 +46,25 @@ document.addEventListener("DOMContentLoaded", () => {
         imagesContainer.appendChild(newLabel);
         imagesContainer.appendChild(sentImageTitle);
         imageFieldContainer.append(imagesContainer);
-        imageFieldContainer.append(deleteButton);
+
+        if (counter > 0) {
+            imageFieldContainer.append(deleteButton);
+        }
+
         mainContainer.appendChild(imageFieldContainer);
 
         event.preventDefault();
+    }
+
+    addImageButton.addEventListener("click", event => {
+        addImageFile();
     });
+
+    addImageFile();
 
     //dynamically add audio containers & audio
 
-    addFileButton.addEventListener("click", event => {
+    const addAudioFile = () => {
         const mainContainer = document.querySelector(".nowa-tradycja-form_files");
         const fieldsContainer = document.createElement("div");
         fieldsContainer.classList.add("fields-container");
@@ -133,18 +142,35 @@ document.addEventListener("DOMContentLoaded", () => {
         audioFileContainer.appendChild(newFileLabel);
         audioFileContainer.appendChild(sentFileTitle);
         fieldsContainer.appendChild(audioFileContainer);
-        fieldsContainer.appendChild(deleteButton);
+        if (counter > 2) {
+            fieldsContainer.appendChild(deleteButton);
+        }
         mainContainer.appendChild(fieldsContainer);
 
         event.preventDefault();
+    }
 
+    addFileButton.addEventListener("click", event => {
+        addAudioFile();
     });
+
+    addAudioFile();
+    addAudioFile();
+    addAudioFile();
 
     //clear form on correct submit
 
     const clearForm = () => {
         const inputsToClear = document.querySelectorAll(".nowa-tradycja-form_field input");
+        const textAreasToClear = document.querySelectorAll(".nowa-tradycja-form_field textarea");
         const filesToClear = document.querySelectorAll("[type='file']");
+
+        if (textAreasToClear) {
+            textAreasToClear.forEach(el => {
+                el.value = null;
+                el.classList.remove("valid");
+            })
+        }
 
         if (inputsToClear) {
             inputsToClear.forEach(el => {
@@ -158,15 +184,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 file.value = null;
             });
         }
-    };
-
-    // remove file containers on correct submit
-
-    const removeFilesContainers = () => {
-        const audioFileContainers = document.querySelectorAll("#nowa-tradycja-form-main .fields-container");
-        const imageFileContainers = document.querySelectorAll("#nowa-tradycja-form-main .image-fields-container");
-        audioFileContainers.forEach(conatiner => conatiner.remove());
-        imageFileContainers.forEach(container => container.remove());
     };
 
     //on submit do following
@@ -283,6 +300,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     textValidation = true;
                 }
             };
+
+            //validate textareas
 
             const handleExtraTextarea = (selector, key) => {
 
@@ -449,9 +468,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let audioValidation = false;
         let imageValidation = false;
 
-        files.forEach((input, index) => {
-
-            console.log(input.files.length, input, imageFiles.files);
+        audioFiles.forEach((input, index) => {
 
             if (audioFiles.length > 0) {
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .title${index}`, `SongTitle${index}`);
@@ -465,7 +482,11 @@ document.addEventListener("DOMContentLoaded", () => {
             } else if (audioFiles.length > 0 && audioFiles.length < 3) {
                 const error = document.querySelector(".nowa-tradycja-form_files .short");
                 error.style.display = "block";
-            } else if (audioFiles.length > 2 && audioFiles.length < 6 && input.files[0].size > 0) {
+            } else if (audioFiles.length > 2 && audioFiles.length < 6 && input.files[0] && document.querySelector(`#title${index}`).classList.contains("valid")) {
+                handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .title${index}`, `SongTitle${index}`);
+                handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .author${index}`, `SongAuthor${index}`);
+                handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .artist${index}`, `SongArtist${index}`);
+
                 const errors = document.querySelectorAll(".nowa-tradycja-form_files .error-message");
                 errors.forEach(error => {
                     error.style.display = "none";
@@ -474,13 +495,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 audioValidation = true;
             }
 
-            if (input.parentNode.classList.contains("image") && input.files.length > 0 && input.files[0].size > 0) {
-                formData.append(`image-file${index}`, input.files[0]);
-                imageValidation = true;
-            }
-
         });
 
+        imageFiles.forEach((input, index) => {
+            if (imageFiles.length > 0 && input.files[index]) {
+                formData.append(`image-file${index}`, input.files[0]);
+                imageValidation = true;
+                const errors = document.querySelectorAll(".nowa-tradycja-form_images .error-message");
+                errors.forEach(error => {
+                    error.style.display = "none";
+                });
+            }
+        });
 
         handleTextInput(".firstName", "FirstName");
         handleTextInput(".lastName", "LastName");
@@ -496,13 +522,14 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
 
         if (textValidation && agreementValidation && emailValidation && numberValidation && imageValidation && audioValidation) {
-
+            console.log(textValidation && agreementValidation && emailValidation && numberValidation && imageValidation && audioValidation)
+            //  JSON.stringify(formData);
             axios({
                     method: "post",
                     data: formData,
                     url: "//localhost:55899/saveform"
                 })
-                .then(removeFilesContainers(), clearForm(), console.log("Validated"))
+                .then(clearForm(), console.log("Validated"))
                 .catch(err => console.log(err));
         }
     });
