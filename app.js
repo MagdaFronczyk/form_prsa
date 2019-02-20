@@ -470,6 +470,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         audioFiles.forEach((input, index) => {
 
+            console.log(document.querySelector(`#title${index}`).classList.contains("valid"));
+
             if (audioFiles.length > 0) {
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .title${index}`, `SongTitle${index}`);
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .author${index}`, `SongAuthor${index}`);
@@ -482,15 +484,19 @@ document.addEventListener("DOMContentLoaded", () => {
             } else if (audioFiles.length > 0 && audioFiles.length < 3) {
                 const error = document.querySelector(".nowa-tradycja-form_files .short");
                 error.style.display = "block";
-            } else if (audioFiles.length > 2 && audioFiles.length < 6 && input.files[0] && document.querySelector(`#title${index}`).classList.contains("valid")) {
-                handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .title${index}`, `SongTitle${index}`);
-                handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .author${index}`, `SongAuthor${index}`);
-                handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .artist${index}`, `SongArtist${index}`);
+            } else if (
+                audioFiles.length > 2 &&
+                audioFiles.length < 6 &&
+                input.files[0] &&
+                document.querySelector(`#title${index}`).classList.contains("valid") &&
+                document.querySelector(`#author${index}`).classList.contains("valid") &&
+                document.querySelector(`#artist${index}`).classList.contains("valid")) {
 
                 const errors = document.querySelectorAll(".nowa-tradycja-form_files .error-message");
                 errors.forEach(error => {
                     error.style.display = "none";
                 });
+                document.querySelector(`.sent-file-title${index}`).innerHTML = "";
                 formData.append(`audio-file${index}`, input.files[0]);
                 audioValidation = true;
             }
@@ -499,12 +505,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         imageFiles.forEach((input, index) => {
             if (imageFiles.length > 0 && input.files[index]) {
-                formData.append(`image-file${index}`, input.files[0]);
-                imageValidation = true;
                 const errors = document.querySelectorAll(".nowa-tradycja-form_images .error-message");
                 errors.forEach(error => {
                     error.style.display = "none";
                 });
+                document.querySelector(`.sent-image-title${index}`).innerHTML = "";
+                formData.append(`image-file${index}`, input.files[0]);
+                imageValidation = true;
             }
         });
 
