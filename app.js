@@ -522,13 +522,18 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(textValidation, agreementValidation, emailValidation, numberValidation, imageValidation, audioValidation);
 
         if (textValidation && agreementValidation && emailValidation && numberValidation && imageValidation && audioValidation) {
+
             console.log(textValidation, agreementValidation, emailValidation, numberValidation, imageValidation, audioValidation);
+
             axios({
                     method: "post",
                     data: formData,
                     url: "//localhost:55899/saveform"
                 })
-                .then(resp => clearForm(), console.log("Validated"))
+                .then(res => {
+                    clearForm();
+                    console.log("Validated", res)
+                })
                 .catch(err => console.log(err));
         }
     });
