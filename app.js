@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         mainContainer.appendChild(imageFieldContainer);
-    }
+    };
 
     addImageButton.addEventListener("click", event => {
         addImageFile();
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (counter < 5) {
             mainContainer.appendChild(fieldsContainer);
         }
-    }
+    };
 
     addFileButton.addEventListener("click", event => {
         addAudioFile();
@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
         textAreasToClear.forEach(el => {
             el.value = null;
             el.classList.remove("valid");
-        })
+        });
 
         inputsToClear.forEach(el => {
             el.value = null;
@@ -471,21 +471,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // validate and append audio & image files
 
-        const files = document.querySelectorAll("[type='file']");
         const audioFiles = document.querySelectorAll(".audio [type='file']");
         const imageFiles = document.querySelectorAll(".image [type='file']");
-
-        if (files.length === 0) {
-            const errorAudio = document.querySelector(".nowa-tradycja-form_files .empty");
-            errorAudio.style.display = "block";
-            const errorImage = document.querySelector(".nowa-tradycja-form_images .empty");
-            errorImage.style.display = "block";
-        };
 
         let audioValidation = false;
         let imageValidation = false;
 
         audioFiles.forEach((input, index) => {
+            let audioValidationFlag = false;
 
             if (audioFiles.length > 0) {
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .title${index}`, `SongTitle${index}`);
@@ -493,21 +486,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 // handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .artist${index}`, `SongArtist${index}`);
             }
 
-            if (audioFiles.length > 5) {
-                const error = document.querySelector(".nowa-tradycja-form_files .long");
-                error.style.display = "block";
-            } else if (audioFiles.length > 0 && audioFiles.length < 3) {
-                const error = document.querySelector(".nowa-tradycja-form_files .short");
-                error.style.display = "block";
-            } else if (
-                audioFiles.length > 2 &&
-                audioFiles.length < 6 &&
+            if (
                 input.files[0] &&
                 document.querySelector(`#title${index}`).classList.contains("valid")
-                // document.querySelector(`#author${index}`).classList.contains("valid") &&
-                // document.querySelector(`#artist${index}`).classList.contains("valid")
+            // document.querySelector(`#author${index}`).classList.contains("valid") &&
+            // document.querySelector(`#artist${index}`).classList.contains("valid")
             ) {
-
                 const errors = document.querySelectorAll(".nowa-tradycja-form_files .error-message");
                 errors.forEach(error => {
                     error.style.display = "none";
@@ -515,9 +499,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 formData.append(`audio-file${index}`, input.files[0]);
                 formData.append(`SongAuthor${index}`, "");
                 formData.append(`SongArtist${index}`, "");
-                audioValidation = true;
-            }
 
+                audioValidationFlag = true;
+            }
+            audioValidation = audioValidationFlag;
         });
 
         imageFiles.forEach((input, index) => {
@@ -541,22 +526,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
         event.preventDefault();
 
+        console.log(textValidation, agreementValidation, emailValidation, numberValidation, imageValidation, audioValidation);
+
         if (textValidation && agreementValidation && emailValidation && numberValidation && imageValidation && audioValidation) {
             const loader = document.querySelector("#nowa-tradycja-form-main .lds-ring");
             loader.style.display = "inline-block";
 
             axios({
-                    method: "post",
-                    data: formData,
-                    url: "https://formularze.polskieradio.pl/saveform"
-                })
+                method: "post",
+                data: formData,
+                url: "https://formularze.polskieradio.pl/saveform"
+            })
                 .then(res => {
                     clearForm();
                     formButton.classList.add("success");
                     loader.style.display = "none";
                     formButton.innerHTML = "Wysłano";
                     formButton.setAttribute("disabled", "true");
-                })
+                });
         }
     });
 
