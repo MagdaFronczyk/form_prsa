@@ -56,6 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     addImageButton.addEventListener("click", event => {
         addImageFile();
+
+        event.preventDefault();
     });
 
     addImageFile();
@@ -114,8 +116,8 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         addTextField(`title${counter}`, `title${counter}`, "Tytuł");
-        addTextField(`artist${counter}`, `artist${counter}`, "Autor");
-        addTextField(`author${counter}`, `author${counter}`, "Wykonawca");
+        // addTextField(`artist${counter}`, `artist${counter}`, "Autor");
+        // addTextField(`author${counter}`, `author${counter}`, "Wykonawca");
 
 
         const audioFileContainer = document.createElement("div");
@@ -143,11 +145,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (counter > 2) {
             fieldsContainer.appendChild(deleteButton);
         }
-        mainContainer.appendChild(fieldsContainer);
+
+        if (counter < 5) {
+            mainContainer.appendChild(fieldsContainer);
+        }
     }
 
     addFileButton.addEventListener("click", event => {
         addAudioFile();
+        event.preventDefault();
     });
 
     addAudioFile();
@@ -366,6 +372,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             };
 
+            // handle fax
+
+            const handleFax = (selector, key) => {
+                const fieldContainer = document.querySelector(selector);
+                const input = fieldContainer.querySelector(`${selector} input`);
+                const value = input.value;
+                input.classList.add("valid");
+                extraFields[key] = value;
+                numberValidation = true;
+            };
+
             // validate zip code
 
             const validateZipCode = (selector, key) => {
@@ -412,7 +429,7 @@ document.addEventListener("DOMContentLoaded", () => {
             handleExtraTextarea(".biografia", "PerformerBiography");
             validateZipCode(".zip-code", "ZipCode");
             handleExtraNumbers(".phone", "Phone");
-            handleExtraNumbers(".fax", "Fax");
+            handleFax(".fax", "Fax");
             handleExtraNumbers(".band-count", "BandMembersCount");
 
             if (numberValidation && textValidation) {
@@ -472,8 +489,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (audioFiles.length > 0) {
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .title${index}`, `SongTitle${index}`);
-                handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .author${index}`, `SongAuthor${index}`);
-                handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .artist${index}`, `SongArtist${index}`);
+                // handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .author${index}`, `SongAuthor${index}`);
+                // handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .artist${index}`, `SongArtist${index}`);
             }
 
             if (audioFiles.length > 5) {
@@ -486,15 +503,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 audioFiles.length > 2 &&
                 audioFiles.length < 6 &&
                 input.files[0] &&
-                document.querySelector(`#title${index}`).classList.contains("valid") &&
-                document.querySelector(`#author${index}`).classList.contains("valid") &&
-                document.querySelector(`#artist${index}`).classList.contains("valid")) {
+                document.querySelector(`#title${index}`).classList.contains("valid")
+                // document.querySelector(`#author${index}`).classList.contains("valid") &&
+                // document.querySelector(`#artist${index}`).classList.contains("valid")
+            ) {
 
                 const errors = document.querySelectorAll(".nowa-tradycja-form_files .error-message");
                 errors.forEach(error => {
                     error.style.display = "none";
                 });
                 formData.append(`audio-file${index}`, input.files[0]);
+                formData.append(`SongAuthor${index}`, "");
+                formData.append(`SongArtist${index}`, "");
                 audioValidation = true;
             }
 
