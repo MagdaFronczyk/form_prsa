@@ -45,15 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
         imagesContainer.appendChild(newInput);
         imagesContainer.appendChild(newLabel);
         imagesContainer.appendChild(sentImageTitle);
-        imageFieldContainer.append(imagesContainer);
+        imageFieldContainer.appendChild(imagesContainer);
 
         if (counter > 0) {
             imageFieldContainer.append(deleteButton);
         }
 
         mainContainer.appendChild(imageFieldContainer);
-
-        event.preventDefault();
     }
 
     addImageButton.addEventListener("click", event => {
@@ -146,8 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
             fieldsContainer.appendChild(deleteButton);
         }
         mainContainer.appendChild(fieldsContainer);
-
-        event.preventDefault();
     }
 
     addFileButton.addEventListener("click", event => {
@@ -164,6 +160,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const inputsToClear = document.querySelectorAll(".nowa-tradycja-form_field input");
         const textAreasToClear = document.querySelectorAll(".nowa-tradycja-form_field textarea");
         const filesToClear = document.querySelectorAll("[type='file']");
+        const audioFiles = document.querySelectorAll(".audio [type='file']");
+        const imageFiles = document.querySelectorAll(".image [type='file']");
 
         textAreasToClear.forEach(el => {
             el.value = null;
@@ -177,6 +175,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         filesToClear.forEach(file => {
             file.value = null;
+        });
+
+        audioFiles.forEach((file, index) => {
+            document.querySelector(`.sent-file-title${index}`).innerHTML = "";
+        });
+
+        imageFiles.forEach((file, index) => {
+            document.querySelector(`.sent-image-title${index}`).innerHTML = "";
         });
     };
 
@@ -488,7 +494,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 errors.forEach(error => {
                     error.style.display = "none";
                 });
-                document.querySelector(`.sent-file-title${index}`).innerHTML = "";
                 formData.append(`audio-file${index}`, input.files[0]);
                 audioValidation = true;
             }
@@ -501,7 +506,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 errors.forEach(error => {
                     error.style.display = "none";
                 });
-                document.querySelector(`.sent-image-title${index}`).innerHTML = "";
                 formData.append(`image-file${index}`, input.files[0]);
                 imageValidation = true;
             }
@@ -513,28 +517,26 @@ document.addEventListener("DOMContentLoaded", () => {
         handleEmail(".e-mail", "Email");
         handleCheckbox("#agreement");
         handleExtraFields();
-
-        for (let el of formData.entries()) {
-            console.log(el);
-        }
+        formData.append("formGroup", 1);
 
         event.preventDefault();
-        console.log(textValidation, agreementValidation, emailValidation, numberValidation, imageValidation, audioValidation);
 
         if (textValidation && agreementValidation && emailValidation && numberValidation && imageValidation && audioValidation) {
-
-            console.log(textValidation, agreementValidation, emailValidation, numberValidation, imageValidation, audioValidation);
+            const loader = document.querySelector("#nowa-tradycja-form-main .lds-ring");
+            loader.style.display = "inline-block";
 
             axios({
                     method: "post",
                     data: formData,
-                    url: "//localhost:55899/saveform"
+                    url: "https://formularze.polskieradio.pl/saveform"
                 })
                 .then(res => {
                     clearForm();
-                    console.log("Validated", res)
+                    formButton.classList.add("success");
+                    loader.style.display = "none";
+                    formButton.innerHTML = "Wysłano";
+                    formButton.setAttribute("disabled", "true");
                 })
-                .catch(err => console.log(err));
         }
     });
 

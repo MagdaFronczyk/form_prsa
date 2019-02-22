@@ -341,7 +341,11 @@ textarea {
     transition: .5s ease-out;
 }
 
-#nowa-tradycja-form-main .form-button:hover {
+#nowa-tradycja-form-main .form-button.success {
+    background-color: #008458;
+}
+
+#nowa-tradycja-form-main .form-button:enabled:hover {
     background-color: #e3e1df;
     color: #e10d49;
 }
@@ -373,6 +377,67 @@ textarea {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center
+}
+
+#nowa-tradycja-form-main .lds-ring {
+    display: none;
+    position: relative;
+    width: 20px;
+    height: 20px;
+}
+
+#nowa-tradycja-form-main .lds-ring div {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin: 3px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    -webkit-animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+}
+
+#nowa-tradycja-form-main .lds-ring div:nth-child(1) {
+    -webkit-animation-delay: -0.45s;
+    animation-delay: -0.45s;
+}
+
+#nowa-tradycja-form-main .lds-ring div:nth-child(2) {
+    -webkit-animation-delay: -0.3s;
+    animation-delay: -0.3s;
+}
+
+#nowa-tradycja-form-main .lds-ring div:nth-child(3) {
+    -webkit-animation-delay: -0.15s;
+    animation-delay: -0.15s;
+}
+
+@-webkit-keyframes lds-ring {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes lds-ring {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
 
 @media screen and (-ms-high-contrast: active),
