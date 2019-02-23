@@ -5,7 +5,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //initate validation flags
 
-    let textValidation, agreementValidation, emailValidation, numberValidation;
+    let textValidation,
+        agreementValidation,
+        emailValidation,
+        numberValidation,
+        firstNameValidation,
+        audioValidation,
+        lastNameValidation,
+        imageValidation,
+        nickValidation,
+        streetNameValidation,
+        cityNameValidation,
+        instrumentsValidation,
+        technicalNeedsValidation,
+        biographyValidation,
+        programValidation,
+        bandMembersValidation,
+        phoneValidation,
+        faxValidation,
+        zipCodeValidation;
 
     //dynamically add image containers & images
 
@@ -211,9 +229,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 const value = input.value;
 
                 if (!value.length || value.length < 3 || value.length > 50 || !isNaN(value)) {
-                    textValidation = false;
                     input.classList.remove("valid");
                     input.classList.add("invalid");
+
+                    if (selector === ".firstName") {
+                        firstNameValidation = false;
+                    } else if (selector === ".lastName") {
+                        lastNameValidation = false;
+                    } else {
+                        nickValidation = false;
+                    }
+
                     if (!value.length) {
                         const error = container.querySelector(".empty");
                         error.style.display = "block";
@@ -236,7 +262,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     input.classList.remove("invalid");
                     input.classList.add("valid");
                     formData.append(key, value);
-                    textValidation = true;
+                    if (selector === ".firstName") {
+                        firstNameValidation = true;
+                    } else if (selector === ".lastName") {
+                        lastNameValidation = true;
+                    } else {
+                        nickValidation = true;
+                    }
                 }
             });
 
@@ -282,7 +314,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 const value = input.value;
 
                 if (!value.length || value.length < 3 || value.length > 50) {
-                    textValidation = false;
+                    if (selector === ".street-name") {
+                        streetNameValidation = false;
+                    } else if (selector === ".city-name") {
+                        cityNameValidation = false;
+                    } else if (selector === ".instruments") {
+                        instrumentsValidation = false;
+                    } else {
+                        technicalNeedsValidation = false;
+                    }
                     input.classList.remove("valid");
                     input.classList.add("invalid");
                     if (!value.length) {
@@ -303,7 +343,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     input.classList.remove("invalid");
                     input.classList.add("valid");
                     extraFields[key] = value;
-                    textValidation = true;
+                    if (selector === ".street-name") {
+                        streetNameValidation = true;
+                    } else if (selector === ".city-name") {
+                        cityNameValidation = true;
+                    } else if (selector === ".instruments") {
+                        instrumentsValidation = true;
+                    } else {
+                        technicalNeedsValidation = true;
+                    }
                 }
             };
 
@@ -316,7 +364,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 const value = input.value;
 
                 if (!value.length || value.length < 3 || value.length > 50) {
-                    textValidation = false;
+                    if (selector === ".biografia") {
+                        biographyValidation = false;
+                    } else {
+                        programValidation = false;
+                    }
                     input.classList.remove("valid");
                     input.classList.add("invalid");
                     if (!value.length) {
@@ -334,6 +386,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     errors.forEach(error => {
                         error.style.display = "none";
                     });
+                    if (selector === ".biografia") {
+                        biographyValidation = true;
+                    } else {
+                        programValidation = true;
+                    }
                     input.classList.remove("invalid");
                     input.classList.add("valid");
                     extraFields[key] = value;
@@ -349,7 +406,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 const value = input.value;
 
                 if (!value.length || isNaN(value)) {
-                    numberValidation = false;
+                    if (selector === ".band-count") {
+                        bandMembersValidation = false;
+                    } else {
+                        phoneValidation = false;
+                    }
                     input.classList.remove("valid");
                     input.classList.add("invalid");
                     if (!value.length) {
@@ -368,7 +429,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     input.classList.remove("invalid");
                     input.classList.add("valid");
                     extraFields[key] = value;
-                    numberValidation = true;
+                    if (selector === ".band-count") {
+                        bandMembersValidation = true;
+                    } else {
+                        phoneValidation = true;
+                    }
                 }
             };
 
@@ -380,7 +445,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const value = input.value;
                 input.classList.add("valid");
                 extraFields[key] = value;
-                numberValidation = true;
+                faxValidation = true;
             };
 
             // validate zip code
@@ -398,9 +463,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     input.classList.remove("invalid");
                     input.classList.add("valid");
                     extraFields[key] = value;
-                    numberValidation = true;
+                    zipCodeValidation = true;
                 } else {
-                    numberValidation = false;
+                    zipCodeValidation = false;
                     input.classList.remove("valid");
                     input.classList.add("invalid");
 
@@ -432,10 +497,9 @@ document.addEventListener("DOMContentLoaded", () => {
             handleFax(".fax", "Fax");
             handleExtraNumbers(".band-count", "BandMembersCount");
 
-            if (numberValidation && textValidation) {
-                const extraFieldsJson = JSON.stringify(extraFields);
-                formData.append("ExtraFieldsJSON", extraFieldsJson);
-            }
+            const extraFieldsJson = JSON.stringify(extraFields);
+            formData.append("ExtraFieldsJSON", extraFieldsJson);
+
 
         };
 
@@ -474,11 +538,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const audioFiles = document.querySelectorAll(".audio [type='file']");
         const imageFiles = document.querySelectorAll(".image [type='file']");
 
-        let audioValidation = false;
-        let imageValidation = false;
-
         audioFiles.forEach((input, index) => {
-            let audioValidationFlag = false;
+            audioValidation = false;
 
             if (audioFiles.length > 0) {
                 handleTextInput(`#nowa-tradycja-form-main .nowa-tradycja-form_files .title${index}`, `SongTitle${index}`);
@@ -499,13 +560,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 formData.append(`audio-file${index}`, input.files[0]);
                 formData.append(`SongAuthor${index}`, "");
                 formData.append(`SongArtist${index}`, "");
-
-                audioValidationFlag = true;
+                audioValidation = true;
             }
-            audioValidation = audioValidationFlag;
         });
 
         imageFiles.forEach((input, index) => {
+            imageValidation = false;
             if (imageFiles.length > 0 && input.files[index]) {
                 const errors = document.querySelectorAll(".nowa-tradycja-form_images .error-message");
                 errors.forEach(error => {
@@ -523,10 +583,21 @@ document.addEventListener("DOMContentLoaded", () => {
         handleCheckbox("#agreement");
         handleExtraFields();
         formData.append("formGroup", 1);
-
+        textValidation = lastNameValidation && firstNameValidation && nickValidation && streetNameValidation && cityNameValidation && technicalNeedsValidation && instrumentsValidation && biographyValidation && programValidation;
+        numberValidation = bandMembersValidation && phoneValidation && faxValidation && zipCodeValidation;
         event.preventDefault();
 
-        console.log(textValidation, agreementValidation, emailValidation, numberValidation, imageValidation, audioValidation);
+        // for (let el of formData.entries()) {
+        //     console.log(el);
+        // }
+        //
+        // console.log(
+        //     "text", textValidation,
+        //     "agreement", agreementValidation,
+        //     "email", emailValidation,
+        //     "number", numberValidation,
+        //     "image", imageValidation,
+        //     "audio", audioValidation);
 
         if (textValidation && agreementValidation && emailValidation && numberValidation && imageValidation && audioValidation) {
             const loader = document.querySelector("#nowa-tradycja-form-main .lds-ring");
